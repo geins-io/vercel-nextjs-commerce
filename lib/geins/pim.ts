@@ -1,5 +1,6 @@
 import { GeinsCore } from '@geins/core';
 import { queries } from './queries';
+import productsQuery from './queries/products';
 import {
   CategoryItemType,
   ProductImageType,
@@ -70,6 +71,8 @@ const reshapeProducts = (response: any): ProductType[] => {
       featuredImage: rawProduct.productImages[0],
       images: rawProduct.productImages.map((image: any): ProductImageType => ({
         caption: rawProduct.name,
+        altText: rawProduct.name,
+        src: `https://labs.commerce.services/product/1600f2000/${image.fileName}`,
         url: `https://labs.commerce.services/product/1600f2000/${image.fileName}`,
         width: 2000,
         height: 1600,     
@@ -120,6 +123,8 @@ const reshapeProduct = (geinsData: any): ProductType => {
       featuredImage: rawProduct.productImages[0],
       images: rawProduct.productImages.map((image: any): ProductImageType => ({
         caption: rawProduct.name,
+        altText: rawProduct.name,
+        src: `https://labs.commerce.services/product/1600f2000/${image.fileName}`,
         url: `https://labs.commerce.services/product/1600f2000/${image.fileName}`,
         width: 2000,
         height: 1600,     
@@ -193,8 +198,8 @@ const pim = {
                 includeCollapsed: false,
             }
         };
-
-        const data = await geinsCore.graphql.query({ query: queries.productsByCategory, variables });
+        console.log('productsQuery', productsQuery);
+        const data = await geinsCore.graphql.query({ query: productsQuery, variables });
         // console.log('data', data);
         return reshapeProducts(data);
     }

@@ -76,21 +76,29 @@ export type ProductType = {
   metaTitle: string;
   metaDescription: string;
   tags: string[];
-  options?: ProductOptionType[];
+  options: ProductOptionType[];
   variants: ProductVariantType[];
   featuredImage: ProductImageType;
   images: ProductImageType[];
   updatedAt?: string;
   availableForSale: boolean;
+  descriptionHtml?: string;
 };
 
+
 export type ProductOptionType = {
+  id: string;
+  name: string;
+  values: string[];
+};
+
+/* export type ProductOptionType = {
   name: string;
   id: string;
   description: string;
   variant: boolean;
-  values: ProductOptionValueType[] | null;
-};
+  values: ProductOptionValueType[];
+}; */
 
 export type ProductOptionValueType = {
   id: string;

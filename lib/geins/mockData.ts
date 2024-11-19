@@ -1,3 +1,5 @@
+import { CartType } from "./types";
+
 
   // Mock Data for Products
   export const mockProducts = Array.from({ length: 25 }, (_, i) => {
@@ -84,7 +86,7 @@
   });
   
   // Mock Data for Cart
-  export const mockCart = {
+  export const mockCart2 = {
     checkoutUrl: "https://example.com/checkout",
     subTotal: 150.00,
     grandTotal: 165.00,
@@ -181,6 +183,75 @@
         title: "Contact Us",
         canonicalUrl: "/contact",
         path: "/contact",
+      },
+    ],
+  };
+  
+  export const mockCart: CartType = {
+    id: "mock-cart-id",
+    checkoutUrl: "https://mock-checkout-url.com",
+    cost: {
+      subtotalAmount: { amount: "100.00", currencyCode: "USD" },
+      totalAmount: { amount: "120.00", currencyCode: "USD" },
+      totalTaxAmount: { amount: "20.00", currencyCode: "USD" },
+    },
+    totalQuantity: 2,
+    lines: [
+      {
+        id: "mock-line-id-1",
+        quantity: 1,
+        cost: {
+          totalAmount: { amount: "60.00", currencyCode: "USD" },
+        },
+        merchandise: {
+          id: "mock-variant-id-1",
+          title: "Mock Variant 1",
+          selectedOptions: [
+            { name: "Size", value: "Medium" },
+            { name: "Color", value: "Red" },
+          ],
+          product: {
+            id: "mock-product-id-1",
+            handle: "mock-product-1",
+            title: "Mock Product 1",
+            featuredImage: {
+              caption: "Featured image for Mock Product 1",
+              altText: "An amazing red shirt",
+              url: "https://example.com/image1.jpg",
+              src: "https://example.com/image1.jpg",
+              width: 800,
+              height: 800,
+            },
+          },
+        },
+      },
+      {
+        id: "mock-line-id-2",
+        quantity: 1,
+        cost: {
+          totalAmount: { amount: "60.00", currencyCode: "USD" },
+        },
+        merchandise: {
+          id: "mock-variant-id-2",
+          title: "Mock Variant 2",
+          selectedOptions: [
+            { name: "Size", value: "Large" },
+            { name: "Color", value: "Blue" },
+          ],
+          product: {
+            id: "mock-product-id-2",
+            handle: "mock-product-2",
+            title: "Mock Product 2",
+            featuredImage: {
+              caption: "Featured image for Mock Product 2",
+              altText: "A stylish blue hoodie",
+              url: "https://example.com/image2.jpg",
+              src: "https://example.com/image2.jpg",
+              width: 800,
+              height: 800,
+            },
+          },
+        },
       },
     ],
   };

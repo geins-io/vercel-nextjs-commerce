@@ -31,6 +31,6 @@ const productsQuery = /* GraphQL */ `
       count
     }
   }
-${listProductFragment}
+  ${listProductFragment}
 `;
 export default productsQuery;

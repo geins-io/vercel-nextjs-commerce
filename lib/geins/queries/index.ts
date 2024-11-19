@@ -1,7 +1,7 @@
-import { default as categoriesQuery } from './queries/categories';
-import { default as listPageInfoQuery } from './queries/listPageInfo';
-import { default as productQuery } from './queries/product';
-import { default as productsQuery } from './queries/products';
+import categoriesQuery from './queries/categories';
+import listPageInfoQuery from './queries/listPageInfo';
+import productQuery from './queries/product';
+import productsQuery from './queries/products';
 
 
 const queries = {
@@ -9,6 +9,7 @@ const queries = {
     listpageMetadata: listPageInfoQuery,
     productsByCategory: productsQuery,
     productByAlias: productQuery,
+    productQuery,
 };
 export { queries };
 
