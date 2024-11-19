@@ -1,4 +1,0 @@
-fragment Campaign on CampaignRuleType {
-  name
-  hideTitle
-}

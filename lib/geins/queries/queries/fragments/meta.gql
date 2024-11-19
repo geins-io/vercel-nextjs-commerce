@@ -1,4 +1,0 @@
-fragment Meta on MetadataType {  
-  title
-  description
-}

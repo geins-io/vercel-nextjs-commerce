@@ -1,9 +1,0 @@
-query Brands {
-  brands {
-    brandId
-    name
-    description
-    logo
-    canonicalUrl
-  }
-}

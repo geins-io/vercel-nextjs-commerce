@@ -1,3 +1,4 @@
+const stockFragment = /* GraphQL */ `
 fragment Stock on StockType {
   inStock
   oversellable
@@ -5,3 +6,5 @@ fragment Stock on StockType {
   static
   incoming
 }
+`;
+export default stockFragment;
