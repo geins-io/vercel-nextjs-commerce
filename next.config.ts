@@ -1,34 +1,24 @@
-/** @type {import('next').NextConfig} */
-module.exports = {
+import { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  images: {
+    domains: ['example.com'], // Add allowed image domains here
+  },
+  env: {
+    CUSTOM_ENV_VARIABLE: process.env.CUSTOM_ENV_VARIABLE || 'defaultValue',
+  },
   webpack: (config) => {
+    // Add custom Webpack rules here
     config.module.rules.push({
-      test: /\.(graphql|gql)$/,
-      exclude: /node_modules/,
-      loader: 'graphql-tag/loader',
+      test: /\.(graphql|gql)$/, // Match .graphql and .gql files
+      exclude: /node_modules/, // Exclude files in node_modules
+      loader: 'graphql-tag/loader', // Use graphql-tag loader
     });
+
     return config;
   },
-  eslint: {
-    // Disabling on production builds because we're running checks on PRs via GitHub Actions.
-    ignoreDuringBuilds: true
-  },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'labs.commerce.services',
-      }
-       
-    ],
-    formats: ['image/avif', 'image/webp'],
-  },
-  async redirects() {
-    return [
-      {
-        source: '/password',
-        destination: '/',
-        permanent: true
-      }
-    ];
-  }
 };
+
+export default nextConfig;
