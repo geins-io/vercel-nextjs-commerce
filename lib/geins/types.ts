@@ -55,7 +55,7 @@ export type MoneyType = {
 
 export type ProductType = {
   id: string;
-  seo?: {
+  seo: {
     title?: string;
     description?: string;
   };
@@ -77,7 +77,7 @@ export type ProductType = {
   metaDescription: string;
   tags: string[];
   options?: ProductOptionType[];
-  variants?: ProductVariantType[];
+  variants: ProductVariantType[];
   featuredImage: ProductImageType;
   images: ProductImageType[];
   updatedAt?: string;
@@ -118,8 +118,9 @@ export type ProductVariantPriceType = {
 
 export type ProductImageType = {
   caption: string;
-  altText?: string;
+  altText: string;
   url: string;
+  src: string;
   width: number;
   height: number;
 };

@@ -7,7 +7,7 @@ import { Gallery } from 'components/product/gallery';
 import { ProductProvider } from 'components/product/product-context';
 import { ProductDescription } from 'components/product/product-description';
 import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
-import { ImageType } from 'lib/geins/types';
+import { ProductImageType } from 'lib/geins/types';
 //import { getProduct, getProductRecommendations } from 'lib/shopify';
 import { getProduct, getProductRecommendations } from 'lib/geins';
 import Link from 'next/link';
@@ -90,7 +90,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
               }
             >
               <Gallery
-                images={product.images.slice(0, 5).map((image: ImageType) => ({
+                images={product.images.slice(0, 5).map((image: ProductImageType) => ({
                   src: image.url,
                   altText: image.altText
                 }))}
