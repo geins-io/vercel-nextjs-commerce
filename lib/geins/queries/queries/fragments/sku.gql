@@ -1,0 +1,10 @@
+#import "./stock.gql"
+fragment Sku on SkuType {
+  skuId
+  gtin
+  name
+  productId
+  stock {
+    ...Stock
+  }
+}
