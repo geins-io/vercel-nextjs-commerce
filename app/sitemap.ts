@@ -1,5 +1,4 @@
 import { getCollections, getPages, getProducts } from 'lib/geins';
-import { validateEnvironmentVariables } from 'lib/utils';
 import { MetadataRoute } from 'next';
 
 type Route = {
@@ -14,7 +13,7 @@ const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
 export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  validateEnvironmentVariables();
+  // validateEnvironmentVariables();
 
   const routesMap = [''].map((route) => ({
     url: `${baseUrl}${route}`,

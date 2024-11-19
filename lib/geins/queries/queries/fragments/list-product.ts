@@ -1,4 +1,4 @@
-import priceFragment from "./price.gql";
+import priceFragment from './price';
 import stockFragment from './stock';
 
 const listProductFragment = /* GraphQL */ `
