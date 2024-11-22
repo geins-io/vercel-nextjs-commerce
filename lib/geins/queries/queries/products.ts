@@ -1,6 +1,6 @@
 import listProductFragment from './fragments/list-product';
 
-const productsQuery = /* GraphQL */ `
+export const productsQuery = /* GraphQL */ `
   query products(
     $skip: Int = null
     $take: Int = null
@@ -26,6 +26,9 @@ const productsQuery = /* GraphQL */ `
       marketId: $marketId
     ) {
       products {
+        brand {
+          name
+        }
         ...ListProduct
       }
       count
@@ -33,4 +36,3 @@ const productsQuery = /* GraphQL */ `
   }
   ${listProductFragment}
 `;
-export default productsQuery;

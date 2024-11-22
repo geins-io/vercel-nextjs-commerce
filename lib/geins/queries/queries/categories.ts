@@ -1,5 +1,5 @@
 
-const categoriesQuery = /* GraphQL */ `
+export const categoriesQuery = /* GraphQL */ `
   query categories($parentCategoryId: Int, $channelId: String, $languageId: String, $marketId: String) {
     categories(
       parentCategoryId: $parentCategoryId
@@ -16,4 +16,3 @@ const categoriesQuery = /* GraphQL */ `
     }
   }
 `;
-export default categoriesQuery;

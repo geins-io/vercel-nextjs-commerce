@@ -13,6 +13,15 @@ export type SeoType = {
   description: string;
 };
 
+export type CollectionType = {
+  id: string;
+  title: string;
+  description: string;
+  handle: string;
+  seo?: SeoType;
+};
+
+
 export type PageType = {
   id: string;
   title: string;

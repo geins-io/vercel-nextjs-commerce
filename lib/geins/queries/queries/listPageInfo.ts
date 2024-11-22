@@ -1,6 +1,7 @@
+
 import listInfoFragment from './fragments/list-info';
 
-const listPageInfoQuery = /* GraphQL */ `
+export const listPageInfoQuery = /* GraphQL */ `
   query listPageInfo(
     $url: String!
     $channelId: String
@@ -18,4 +19,3 @@ const listPageInfoQuery = /* GraphQL */ `
   }
   ${listInfoFragment}
 `;
-export default listPageInfoQuery;

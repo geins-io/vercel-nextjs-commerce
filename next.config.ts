@@ -4,7 +4,8 @@ export default {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'commerce.services',
+        hostname: 'labs.commerce.services',
+        pathname: '/product/**'
       }
     ]
   }

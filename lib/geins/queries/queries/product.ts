@@ -1,12 +1,12 @@
 import campaignFragment from './fragments/campaign';
-import skuFragment from './fragments/list-product';
 import metaFragment from './fragments/meta';
 import priceFragment from './fragments/price';
+import skuFragment from './fragments/sku';
 import stockFragment from './fragments/stock';
 import variantFragment from './fragments/variant';
 
 
-const productQuery = /* GraphQL */ `
+export const productQuery = /* GraphQL */ `
   query product(
     $alias: String!
     $channelId: String
@@ -99,4 +99,3 @@ const productQuery = /* GraphQL */ `
   ${metaFragment}
   ${campaignFragment}
 `;
-export default productQuery;

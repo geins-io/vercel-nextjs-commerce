@@ -7,8 +7,13 @@ const reshapeMenu = (geinsMenu: GeinsMenuType,locationId: string) => {
         return [];
     }
     
-    return geinsMenu.menuItems.map((item) => {
+    return geinsMenu.menuItems.map((item) => {       
         let itemPath = item?.canonicalUrl?.split('/').pop() || '';
+        if(item?.type === 'category') {
+            itemPath = '/search/'+itemPath;
+        } else if(item?.type === 'custom') {
+            itemPath = item?.canonicalUrl || '';
+        }
         return {
             id: locationId+':'+item?.id || '',
             title: item?.title || '',
