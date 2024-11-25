@@ -127,8 +127,8 @@ const reshapeProduct = (geinsProductData: any): ProductType => {
   const images = rawProduct.productImages?.map((image: any): ProductImageType => ({
     caption: rawProduct.name,
     altText: rawProduct.name,
-    src: `${IMAGE_URL}/product/1600f2000/${image.fileName}`,
-    url: `${IMAGE_URL}/product/1600f2000/${image.fileName}`,        
+    src: `${IMAGE_URL}/product/1200f1500/${image.fileName}`,
+    url: `${IMAGE_URL}/product/1200f1500/${image.fileName}`,        
     height: 1600,     
     width: 2000,
   }));

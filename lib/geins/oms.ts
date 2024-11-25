@@ -37,8 +37,8 @@ const reshapeCart = (geinsData: any): CartType => {
                     featuredImage: {
                         caption: item.product.name,
                         altText: item.product.name,
-                        url: `${IMAGE_URL}/product/1600f2000/${item.product.productImages[0].fileName}`,
-                        src: `${IMAGE_URL}/product/1600f2000/${item.product.productImages[0].fileName}`,
+                        url: `${IMAGE_URL}/product/100f125/${item.product.productImages[0].fileName}`,
+                        src: `${IMAGE_URL}/product/100f125/${item.product.productImages[0].fileName}`,
                         height: 1600,
                         width: 2000,
                     }
@@ -67,19 +67,15 @@ const reshapeCart = (geinsData: any): CartType => {
         },
         checkoutUrl: '#'    
     }
-    // ${item.productImages[0].fileName}
-    console.log('');
+
+/*     console.log('');
     console.log('-------- RAW DATA');
    if(geinsData.items){
     console.log(geinsData.items);
     console.log('');
-    console.log('<<<<<<<< skus');
-    //console.log(geinsData.items[0].product.skus); 
     } else {
         console.log('NO ITEMS');
     }
-   //     console.log(geinsData);
-   // }  
   
     console.log('-------------------');
     console.log('');
@@ -90,7 +86,7 @@ const reshapeCart = (geinsData: any): CartType => {
     console.log('*******************');
     console.log('');
     console.log('');
-    console.log(''); 
+    console.log('');  */
     return data;
 }
 
@@ -98,9 +94,10 @@ const oms = {
     createCart: async (geinsCore: GeinsCore): Promise<any>  => {      
 /*         console.log('');
         console.log('');
-        console.log('*** OMS . createCart'); */
+        */
 
         // make a copy of
+        console.log('*** OMS . createCart');
         
 
         const data = await geinsCore.graphql.query({ queryAsString: cartCreateQuery, variables: {}, requestOptions: { fetchPolicy: 'no-cache' }});
@@ -112,7 +109,7 @@ const oms = {
     getCart: async (geinsCore: GeinsCore, id: string | undefined): Promise<any> => {
       //  console.log('');
       //  console.log('');
-      //  console.log('*** OMS . getCart');
+        console.log('*** OMS . getCart', id);
         const data = await geinsCore.graphql.query({ queryAsString: cartGetQuery, variables: { id }, requestOptions: { fetchPolicy: 'no-cache' }});
         if(!data || !data.getCart) {
             console.log('*** NO CART data:', data);
