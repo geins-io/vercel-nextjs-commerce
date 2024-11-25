@@ -25,6 +25,7 @@ export function VariantSelector({
   if (hasNoOptionsOrJustOneOption) {
     return null;
   }
+  //console.log('*** combos: variants ', variants);
 
   const combinations: Combination[] = variants.map((variant) => ({
     id: variant.id,
@@ -34,6 +35,7 @@ export function VariantSelector({
       {}
     )
   }));
+  
 
   return options.map((option) => (
     <form key={option.id}>

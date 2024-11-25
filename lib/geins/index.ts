@@ -1,9 +1,9 @@
 import { GeinsCore, GeinsSettings } from '@geins/core';
 import { NextRequest, NextResponse } from 'next/server';
 import cms from './cms';
-import { mockCart } from './mockData';
+import oms from './oms';
 import pim from './pim';
-import { CartType, MenuItemType, PageType, ProductType } from './types';
+import { CartItemInputType, CartType, MenuItemType, PageType, ProductType } from './types';
 
 
 const geinsSettings: GeinsSettings = {
@@ -23,7 +23,13 @@ const geinsCore = new GeinsCore(geinsSettings);
 */
 
 export const getCollections = async (parentNodeId: number = 0) => {  
-  return await pim.getCategories(geinsCore, parentNodeId);
+  const data =  await pim.getCategories(geinsCore, parentNodeId);
+  // update every item with 'search' to the path
+  data.forEach((item) => {
+    item.path = `/search/${item.slug}`;
+  });
+  
+  return data;
 };
 
 export const getCollection = async (slug: string):  Promise<any> => {
@@ -33,7 +39,6 @@ export const getCollection = async (slug: string):  Promise<any> => {
 /* 
   PRODUCT LISTS
 */
-
 
 export async function getProducts({
   query,
@@ -73,8 +78,8 @@ export const getProduct = async (slug: string) => {
   return  pim.getProduct(geinsCore, slug);
 };
 
-export async function getProductRecommendations(productId: string): Promise<ProductType[]> {
-  return [] as ProductType[];
+export async function getProductRecommendations(product: ProductType): Promise<ProductType[]> {
+  return pim.getProductRecommendations(geinsCore, product);  
 }
 
 /* 
@@ -108,51 +113,75 @@ export async function getPage(handle: string): Promise<PageType> {
 */
 
 export async function createCart(): Promise<CartType> {
-  return mockCart as CartType;
+  const cart  = await oms.createCart(geinsCore);
+  return cart as CartType;
 }
+
 export async function getCart(cartId: string | undefined): Promise<CartType | undefined> {
-  return mockCart as CartType;
-};
+  //console.log('*** index. getCart', cartId);
+  const cart  = await oms.getCart(geinsCore, cartId);
+  //console.log('*** index. getCart', cart);
+  return cart as CartType;  
+}
+
 export async function addToCart(
   cartId: string,
   lines: { merchandiseId: string; quantity: number }[]
-): Promise<CartType> {
+): Promise<CartType| undefined> {
+    if(!cartId) {
+      return undefined;
+    }
+    
+    // create geins item to add from lines
+    const items = lines.map((item) => {
+      return {
+        skuId: item.merchandiseId,
+        quantity: item.quantity,
+      }
+    });
+    
+    // add to cart for each item
+    let cart = {} as CartType;
+    for (let i = 0; i < items.length; i++) {
+      cart = await oms.addToCart(geinsCore, cartId, items[i] as CartItemInputType);      
+    }    
+    return cart;
+}
 
-    // console.log('addToCart', sessionToken, productId, quantity, options);
-    return mockCart as CartType;
-/*
-  const product = mockProducts.find((p) => p.id === productId);
-  if (product) {
-    const newCartItem = {
-      id: `${mockCart.items.length + 1}`,
-      quantity,
-      price: product.price * quantity,
-      discountTotal: 0,
-      taxTotal: 0,
-      variantId: '',
-      options: options || [],
-      variant: { name: '' },
-      product: {
-        ...product,
-        images: [],
-      },
-    };
-    mockCart.items.push(newCartItem);
-    mockCart.subTotal += newCartItem.price;
-    mockCart.grandTotal += newCartItem.price; // Simplified; usually includes tax/shipping
-  }
-  return mockCart;
-  */
-};
 export async function updateCart(
   cartId: string,
   lines: { id: string; merchandiseId: string; quantity: number }[]
 ): Promise<CartType> {
-    return mockCart as CartType;
-};
-export async function removeFromCart(cartId: string, lineIds: string[]): Promise<CartType> {
-  return mockCart as CartType;
-};
+
+  // create geins item to add from lines
+  const items = lines.map((item) => {
+    return {
+      id: item.id,      
+      quantity: item.quantity,
+    }
+  });
+   let cart = {} as CartType;
+    for (let i = 0; i < items.length; i++) {
+      cart = await oms.updateCart(geinsCore, cartId, items[i] as CartItemInputType);      
+    }    
+    return cart;
+}
+
+export async function removeFromCart(
+  cartId: string,
+  lineIds: string[]
+): Promise<CartType| undefined> {
+    if(!cartId) {
+      return undefined;
+    }
+
+    let cart = {} as CartType;
+    for (let i = 0; i < lineIds.length; i++) {
+      cart = await oms.removeFromCart(geinsCore, cartId, lineIds[i] as string);      
+    }
+
+    return cart;
+}
 
 
 /* 

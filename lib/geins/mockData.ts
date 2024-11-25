@@ -217,8 +217,8 @@ import { CartType } from "./types";
             featuredImage: {
               caption: "Featured image for Mock Product 1",
               altText: "An amazing red shirt",
-              url: "https://example.com/image1.jpg",
-              src: "https://example.com/image1.jpg",
+              url: "https://labs.commerce.services/product/1600f2000/arket-dana-sweater-pink.jpg",
+              src: "https://labs.commerce.services/product/1600f2000/arket-dana-sweater-pink.jpg",
               width: 800,
               height: 800,
             },
@@ -245,8 +245,8 @@ import { CartType } from "./types";
             featuredImage: {
               caption: "Featured image for Mock Product 2",
               altText: "A stylish blue hoodie",
-              url: "https://example.com/image2.jpg",
-              src: "https://example.com/image2.jpg",
+              url: "https://labs.commerce.services/product/1600f2000/arket-dana-sweater-pink.jpg",
+              src: "https://labs.commerce.services/product/1600f2000/arket-dana-sweater-pink.jpg",
               width: 800,
               height: 800,
             },

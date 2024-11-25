@@ -1,5 +1,5 @@
 
-import listInfoFragment from './fragments/list-info';
+import listInfoFragment from '../fragments/list-info';
 
 export const listPageInfoQuery = /* GraphQL */ `
   query listPageInfo(

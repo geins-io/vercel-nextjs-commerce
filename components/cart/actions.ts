@@ -8,7 +8,10 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export async function addItem(prevState: any, selectedVariantId: string | undefined) {
+  console.log('*** addItem', selectedVariantId);
   let cartId = (await cookies()).get('cartId')?.value;
+  console.log('*** addItem', cartId);
+  
 
   if (!cartId || !selectedVariantId) {
     return 'Error adding item to cart';
@@ -115,5 +118,6 @@ export async function redirectToCheckout() {
 
 export async function createCartAndSetCookie() {
   let cart = await createCart();
+  console.log('*** createCartAndSetCookie', cart);
   (await cookies()).set('cartId', cart.id!);
 }

@@ -1,4 +1,4 @@
-import listProductFragment from './fragments/list-product';
+import listProductFragment from '../fragments/list-product';
 
 export const productsQuery = /* GraphQL */ `
   query products(

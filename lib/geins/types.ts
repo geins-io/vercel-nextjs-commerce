@@ -92,7 +92,24 @@ export type ProductType = {
   updatedAt?: string;
   availableForSale: boolean;
   descriptionHtml?: string;
+  relations?: ProductRelationType[];
 };
+
+// enum for relationType
+export enum ProductRelationTypeEnum {
+  BRAND = 'BRAND',
+  CATEGORY= 'CATEGORY',
+  RELATED = 'RELATED',
+  SIMILAR = 'SIMILAR',
+  CROSS_SELL = 'CROSS_SELL',
+  UP_SELL = 'UP_SELL',
+}
+
+export type ProductRelationType = {
+  type: ProductRelationTypeEnum;
+  name: string;
+  alias: string;
+}
 
 
 export type ProductOptionType = {
@@ -116,7 +133,6 @@ export type ProductOptionValueType = {
 };
 
 
-
 export type ProductVariantType = {
   id: string;
   title: string;
@@ -128,10 +144,10 @@ export type ProductVariantType = {
   price: MoneyType;
 };
 
-export type ProductVariantPriceType = {
+/* export type ProductVariantPriceType = {
   price: number;
   discountPercent: number;
-};
+}; */
 
 export type ProductImageType = {
   caption: string;
@@ -185,3 +201,9 @@ export type CartProductType = {
   title: string;
   featuredImage: ProductImageType;
 };
+
+export type CartItemInputType = {
+  id?: string;
+  skuId?: string; 
+  quantity: number 
+}

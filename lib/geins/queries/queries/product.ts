@@ -1,9 +1,9 @@
-import campaignFragment from './fragments/campaign';
-import metaFragment from './fragments/meta';
-import priceFragment from './fragments/price';
-import skuFragment from './fragments/sku';
-import stockFragment from './fragments/stock';
-import variantFragment from './fragments/variant';
+import campaignFragment from '../fragments/campaign';
+import metaFragment from '../fragments/meta';
+import priceFragment from '../fragments/price';
+import skuFragment from '../fragments/sku';
+import stockFragment from '../fragments/stock';
+import variantFragment from '../fragments/variant';
 
 
 export const productQuery = /* GraphQL */ `
@@ -40,6 +40,10 @@ export const productQuery = /* GraphQL */ `
         alias
         canonicalUrl
       }
+      categories {
+        name
+        alias        
+      }
       unitPrice {
         ...Price
       }
@@ -70,7 +74,6 @@ export const productQuery = /* GraphQL */ `
         level
         label
       }
-
       variantGroup {
         variants {
           variants {

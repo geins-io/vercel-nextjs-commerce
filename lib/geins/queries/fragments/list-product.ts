@@ -5,6 +5,7 @@ const listProductFragment = /* GraphQL */ `
   fragment ListProduct on ProductType {
     brand {
       name
+      alias
     }
     name
     productId
@@ -19,6 +20,7 @@ const listProductFragment = /* GraphQL */ `
     }
     primaryCategory {
       name
+      alias
     }
     totalStock {
       ...Stock
