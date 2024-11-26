@@ -9,10 +9,9 @@ import { redirect } from 'next/navigation';
 
 export async function addItem(prevState: any, selectedVariantId: string | undefined) {
 
-  let cartId = (await cookies()).get('cartId')?.value;
-  cartId = 'dbe929e5-a799-46b9-bd09-33c781b00afc';
+  let cartId = (await cookies()).get('cartId')?.value;  
   console.log('action.addItem ', cartId);
-  console.log('action.addItem', cartId);
+  
   
 
   if (!cartId || !selectedVariantId) {
@@ -119,7 +118,6 @@ export async function redirectToCheckout() {
 }
 
 export async function createCartAndSetCookie() {
-  console.log('action.createCartAndSetCookie');
   let cart = await createCart();
   (await cookies()).set('cartId', cart.id!);
 }

@@ -1,6 +1,6 @@
 import { GeinsCMS } from '@geins/cms';
 import { GeinsCore, GeinsMenuType } from '@geins/core';
-import { MenuItemType } from './types';
+import { MenuItemType, PageType } from './types';
 
 const reshapeMenu = (geinsMenu: GeinsMenuType,locationId: string) => {
     if(!geinsMenu.menuItems) {
@@ -22,20 +22,44 @@ const reshapeMenu = (geinsMenu: GeinsMenuType,locationId: string) => {
     });
 }
 
+const reshapePage = (geinsPage: any, alias:string): PageType => {
+    if(!geinsPage) {
+        undefined;
+    }
+    // date string of today
+    //console.log('**** raw', geinsPage);
+    const title = geinsPage.meta.title || '';
+    const today = new Date().toISOString();
 
 
-const cms = {
-    getMenu: async (geinsCore: GeinsCore, locationId: string) : Promise<MenuItemType[]> => {        
-        const geinsCMS = new GeinsCMS(geinsCore);
-        const menu = await geinsCMS.menu.get({ menuLocationId: locationId }).then((result) => {        
-            return result as GeinsMenuType;
-        });
-        return reshapeMenu(menu,locationId);        
-    },    
-    getPage: async (geinsCore: GeinsCore, id: string) => {
-    },
-};
+    return {
+        id: alias || '',
+        title: alias || '',
+        handle: alias || '',
+        body: geinsPage?.body || '',
+        bodySummary: geinsPage?.bodySummary || '',
+        seo: geinsPage?.seo || '',
+        createdAt: geinsPage?.createdAt || today ,
+        updatedAt: geinsPage?.updatedAt || today,
+    };
+}
 
 
-export default cms;
 
+export const getMenu = async (geinsCore: GeinsCore, locationId: string) : Promise<MenuItemType[]> => {        
+    const geinsCMS = new GeinsCMS(geinsCore);
+    const menu = await geinsCMS.menu.get({ menuLocationId: locationId }).then((result) => {        
+        return result as GeinsMenuType;
+    });
+    return reshapeMenu(menu,locationId);        
+}
+    
+export const getPage = async (geinsCore: GeinsCore, alias: string) => {    
+    const geinsCMS = new GeinsCMS(geinsCore);
+    const data = await geinsCMS.page.get({ alias }).then((result) => {        
+        return result;
+    });
+    const rehaped = reshapePage(data, alias);
+    //console.log('**** getPage rehaped', rehaped);
+    return rehaped;
+}

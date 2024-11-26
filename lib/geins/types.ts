@@ -118,14 +118,6 @@ export type ProductOptionType = {
   values: string[];
 };
 
-/* export type ProductOptionType = {
-  name: string;
-  id: string;
-  description: string;
-  variant: boolean;
-  values: ProductOptionValueType[];
-}; */
-
 export type ProductOptionValueType = {
   id: string;
   name: string;
@@ -144,10 +136,6 @@ export type ProductVariantType = {
   price: MoneyType;
 };
 
-/* export type ProductVariantPriceType = {
-  price: number;
-  discountPercent: number;
-}; */
 
 export type ProductImageType = {
   caption: string;

@@ -1,3 +1,5 @@
+'use server';
+
 import { GeinsCore } from '@geins/core';
 import { cartAddMutation } from './queries/mutations/cart-add';
 import { cartUpdateMutation } from './queries/mutations/cart-line-update';
@@ -11,7 +13,7 @@ const IMAGE_URL = process.env.GEINS_IMAGE_URL || 'https://labs.commerce.services
 const reshapeCart = (geinsData: any): CartType => {    
     if (!geinsData) {
         return {} as CartType;
-    }    
+    }
     const items: CartItemType[] = [];
     let totalQuantity = 0;
     geinsData.items?.forEach((item: any) => {
@@ -22,7 +24,7 @@ const reshapeCart = (geinsData: any): CartType => {
             quantity: item.quantity,
             cost: {
                 totalAmount: {
-                    amount: item.unitPrice.sellingPriceIncVat+'',
+                    amount: item.totalPrice.sellingPriceIncVat+'',
                     currencyCode: CURRENCY_CODE
                 }
             },
@@ -90,65 +92,51 @@ const reshapeCart = (geinsData: any): CartType => {
     return data;
 }
 
-const oms = {
-    createCart: async (geinsCore: GeinsCore): Promise<any>  => {      
-/*         console.log('');
-        console.log('');
-        */
 
-        // make a copy of
-        console.log('*** OMS . createCart');
-        
-
-        const data = await geinsCore.graphql.query({ queryAsString: cartCreateQuery, variables: {}, requestOptions: { fetchPolicy: 'no-cache' }});
-        if(!data || !data.getCart) {
-            return {};
-        }
-        return reshapeCart(data.getCart);
-    },
-    getCart: async (geinsCore: GeinsCore, id: string | undefined): Promise<any> => {
-      //  console.log('');
-      //  console.log('');
-        console.log('*** OMS . getCart', id);
-        const data = await geinsCore.graphql.query({ queryAsString: cartGetQuery, variables: { id }, requestOptions: { fetchPolicy: 'no-cache' }});
-        if(!data || !data.getCart) {
-            console.log('*** NO CART data:', data);
-            return {};
-        }
-        return reshapeCart(data.getCart);
-    },
-    addToCart: async (geinsCore: GeinsCore, id: string, item: CartItemInputType): Promise<any> => {
-        /* console.log('');
-        console.log('');
-        console.log('*-*-*-* OMS . addToCart', id, item); */
-        // VOID? 
-        const data = await geinsCore.graphql.mutation({ queryAsString: cartAddMutation, variables:{id: id, item: item,}, requestOptions: { fetchPolicy: 'no-cache' }});      
-        if(!data || !data.addToCart) {
-            console.log('*** NO CART data:', data);
-            return {};
-        }
-        return reshapeCart(data.addToCart);
-    },
-    removeFromCart: async (geinsCore: GeinsCore, id: string, itemId: string): Promise<any> => {
-        const item = {
-            id: itemId, 
-            quantity: 0
-        };
-        const data = await geinsCore.graphql.mutation({ queryAsString: cartUpdateMutation, variables:{id, item }, requestOptions: { fetchPolicy: 'no-cache' }});      
-        if(!data || !data.updateCartItem) {
-            console.log('*** NO CART data:', data);
-            return {};
-        }
-        return reshapeCart(data.updateCartItem);
-    },
-    updateCart: async (geinsCore: GeinsCore, id: string, item: CartItemInputType): Promise<any> => {
-        const data = await geinsCore.graphql.mutation({ queryAsString: cartUpdateMutation, variables:{id, item }, requestOptions: { fetchPolicy: 'no-cache' }});      
-        if(!data || !data.updateCartItem) {
-            console.log('*** NO CART data:', data);
-            return {};
-        }
-        return reshapeCart(data.updateCartItem);
+export const createCart = async (geinsCore: GeinsCore): Promise<any>  => { 
+    const data = await geinsCore.graphql.query({ queryAsString: cartCreateQuery, variables: {}, requestOptions: { fetchPolicy: 'no-cache' }});
+    if(!data || !data.getCart) {
+        return {};
     }
-};
+    return reshapeCart(data.getCart);
+}
 
-export default oms;
+export const getCart=  async (geinsCore: GeinsCore, id: string | undefined): Promise<any> => {
+    const data = await geinsCore.graphql.query({ queryAsString: cartGetQuery, variables: { id }, requestOptions: { fetchPolicy: 'no-cache' }});
+    if(!data || !data.getCart) {
+        console.log('*** NO CART data:', data);
+        return {};
+    }
+    return reshapeCart(data.getCart);
+}
+
+export const addToCart = async (geinsCore: GeinsCore, id: string, item: CartItemInputType): Promise<any> => {
+    const data = await geinsCore.graphql.mutation({ queryAsString: cartAddMutation, variables:{id: id, item: item,}, requestOptions: { fetchPolicy: 'no-cache' }});      
+    if(!data || !data.addToCart) {
+        console.log('*** NO CART data:', data);
+        return {};
+    }
+    return reshapeCart(data.addToCart);
+}
+
+export const removeFromCart = async (geinsCore: GeinsCore, id: string, itemId: string): Promise<any> => {
+    const item = {
+        id: itemId, 
+        quantity: 0
+    };
+    const data = await geinsCore.graphql.mutation({ queryAsString: cartUpdateMutation, variables:{id, item }, requestOptions: { fetchPolicy: 'no-cache' }});      
+    if(!data || !data.updateCartItem) {
+        console.log('*** NO CART data:', data);
+        return {};
+    }
+    return reshapeCart(data.updateCartItem);
+}
+
+export const updateCart=  async (geinsCore: GeinsCore, id: string, item: CartItemInputType): Promise<any> => {
+    const data = await geinsCore.graphql.mutation({ queryAsString: cartUpdateMutation, variables:{id, item }, requestOptions: { fetchPolicy: 'no-cache' }});      
+    if(!data || !data.updateCartItem) {
+        console.log('*** NO CART data:', data);
+        return {};
+    }
+    return reshapeCart(data.updateCartItem);
+}

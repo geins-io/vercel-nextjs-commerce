@@ -180,6 +180,6 @@ export function useCart() {
   if (context === undefined) {
     throw new Error('useCart must be used within a CartProvider');
   }
-  console.log('*** useCart', context);
+  
   return context;
 }
