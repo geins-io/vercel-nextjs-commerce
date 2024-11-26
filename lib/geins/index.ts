@@ -113,12 +113,13 @@ export async function getPage(handle: string): Promise<PageType> {
 */
 
 export async function createCart(): Promise<CartType> {
+  console.log('*** index.createCart'); 
   const cart  = await oms.createCart(geinsCore);
   return cart as CartType;
 }
 
 export async function getCart(cartId: string | undefined): Promise<CartType | undefined> {
-  //console.log('*** index. getCart', cartId);
+  console.log('*** index. getCart', cartId);
   const cart  = await oms.getCart(geinsCore, cartId);
   //console.log('*** index. getCart', cart);
   return cart as CartType;  
@@ -128,6 +129,7 @@ export async function addToCart(
   cartId: string,
   lines: { merchandiseId: string; quantity: number }[]
 ): Promise<CartType| undefined> {
+  console.log('*** index.addToCart', cartId, lines);
     if(!cartId) {
       return undefined;
     }
@@ -152,6 +154,7 @@ export async function updateCart(
   cartId: string,
   lines: { id: string; merchandiseId: string; quantity: number }[]
 ): Promise<CartType> {
+  console.log('*** index.updateCart', cartId, lines);
 
   // create geins item to add from lines
   const items = lines.map((item) => {
@@ -171,6 +174,7 @@ export async function removeFromCart(
   cartId: string,
   lineIds: string[]
 ): Promise<CartType| undefined> {
+  console.log('*** index.removeFromCart', cartId, lineIds);
     if(!cartId) {
       return undefined;
     }
