@@ -13,11 +13,11 @@ importers:
   .:
     dependencies:
       '@geins/cms':
-        specifier: 0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2
-        version: 0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)
+        specifier: ^0.3.6
+        version: 0.3.6(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)
       '@geins/core':
-        specifier: 0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2
-        version: 0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)
+        specifier: ^0.3.6
+        version: 0.3.6(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)
       '@headlessui/react':
         specifier: ^2.1.2
         version: 2.2.0(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)
@@ -47,8 +47,8 @@ importers:
         version: 1.7.0(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)
     devDependencies:
       '@geins/types':
-        specifier: 0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2
-        version: 0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2
+        specifier: ^0.3.6
+        version: 0.3.6
       '@tailwindcss/container-queries':
         specifier: ^0.1.1
         version: 0.1.1(tailwindcss@3.4.15)
@@ -135,14 +135,14 @@ packages:
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
 
-  '@geins/cms@0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2':
-    resolution: {integrity: sha512-6a1ZBV7VNNgYlm6/0XAdadRLE4TlatdutzPsJeNdpBK+/HP4ACdNNVrEX+gzxd/EMWr4a4Z6pzP5t7b6/jAWVQ==}
+  '@geins/cms@0.3.6':
+    resolution: {integrity: sha512-4o0xHpz3nLpj0LNPMb1Xvev52CtsNBBvl9BjlKqPMZLChk6nwWebCZvQ4caFFWPv3TRq4EEoZSIenBuhexLVVQ==}
 
-  '@geins/core@0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2':
-    resolution: {integrity: sha512-P4vcE7hVPz7mtR3K/EAybiOJGrpBfyfXrblQ2ZUFPLpGtjVaHeFu9VpDN/Riim7RXxAbD44ToKByutuYyLlGLQ==}
+  '@geins/core@0.3.6':
+    resolution: {integrity: sha512-+9epg57KrshyOGdTv02JXPp5wzyf/jcXEya0lBgZyoafRZ3FWxVq+vQ+m9bJT/C8R0ik1GChRP6jQaYQLvMd+g==}
 
-  '@geins/types@0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2':
-    resolution: {integrity: sha512-M6lImCE1f2WztYKmNwkUImZX7gMJss6w3fyNnDxxmgMkhws9vE47G+m+91M9WqtCO7EE9yvzGFJcO9jCZHSUMg==}
+  '@geins/types@0.3.6':
+    resolution: {integrity: sha512-01ubntt1hY20leZo45XQOvKn5P1h+XhzHvc+4XxZ8fRi4RIy1/+PpFgiJG+gUK321QGsjTkdall0Szwof2naSA==}
 
   '@graphql-typed-document-node/core@3.2.0':
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
@@ -1212,10 +1212,10 @@ snapshots:
 
   '@floating-ui/utils@0.2.8': {}
 
-  '@geins/cms@0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)':
+  '@geins/cms@0.3.6(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)':
     dependencies:
       '@apollo/client': 3.11.10(graphql@16.9.0)(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)
-      '@geins/core': 0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)
+      '@geins/core': 0.3.6(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)
       graphql: 16.9.0
     transitivePeerDependencies:
       - '@types/react'
@@ -1224,7 +1224,7 @@ snapshots:
       - react-dom
       - subscriptions-transport-ws
 
-  '@geins/core@0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)':
+  '@geins/core@0.3.6(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)':
     dependencies:
       '@apollo/client': 3.11.10(graphql@16.9.0)(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)(types-react@19.0.0-rc.1)
       broadcast-channel: 7.0.0
@@ -1238,7 +1238,7 @@ snapshots:
       - react-dom
       - subscriptions-transport-ws
 
-  '@geins/types@0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2': {}
+  '@geins/types@0.3.6': {}
 
   '@graphql-typed-document-node/core@3.2.0(graphql@16.9.0)':
     dependencies:

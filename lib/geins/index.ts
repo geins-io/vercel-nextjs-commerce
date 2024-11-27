@@ -1,22 +1,24 @@
-'use server';
 
 import { GeinsCore, GeinsSettings } from '@geins/core';
+import { cookies } from 'next/headers';
 import * as cms from './cms';
 import * as oms from './oms';
 import pim from './pim';
 import { CartItemInputType, CartType, MenuItemType, PageType, ProductType } from './types';
 
-
 const geinsSettings: GeinsSettings = {
-    apiKey: process.env.GEINS_API_KEY || '',
-    accountName: process.env.GEINS_ACCOUNT_NAME || '',
-    channel: process.env.GEINS_CHANNEL || '',
-    tld: process.env.GEINS_TLD || '',
-    locale: process.env.GEINS_LOCALE || '',
-    market: process.env.GEINS_MARKET || '',
-    environment: 'qa',
+  apiKey: process.env.GEINS_API_KEY || '',
+  accountName: process.env.GEINS_ACCOUNT_NAME || '',
+  channel: process.env.GEINS_CHANNEL || '',
+  tld: process.env.GEINS_TLD || '',
+  locale: process.env.GEINS_LOCALE || '',
+  market: process.env.GEINS_MARKET || '',  
+  environment: 'qa',
 };
 const geinsCore = new GeinsCore(geinsSettings);
+
+
+
 
 /* 
   COLLECTIONS / CATEFORIES
@@ -98,7 +100,12 @@ export async function getPages(): Promise<PageType[]> {
 
 export async function getPage(handle: string): Promise<PageType> {  
   if(handle === 'checkout') {
-    return oms.getCheckoutPage(geinsCore);
+
+    let cartId = (await cookies()).get('cartId')?.value;
+    if(!cartId) {
+      return {} as PageType;
+    }
+    return oms.getCheckoutPage(geinsCore, cartId);   
   }  
   return cms.getPage(geinsCore, handle);
 }
@@ -121,22 +128,23 @@ export async function addToCart(
   cartId: string,
   lines: { merchandiseId: string; quantity: number }[]
 ): Promise<CartType| undefined> {
-    if(!cartId) {
+  
+  if(!cartId) {
       return undefined;
-    }
+  }
     
-    const items = lines.map((item) => {
-      return {
-        skuId: parseInt(item.merchandiseId),
-        quantity: item.quantity,
-      }
-    });
+  const items = lines.map((item) => {
+    return {
+      skuId: parseInt(item.merchandiseId),
+      quantity: item.quantity,
+    }
+  });
 
-    let cart = {} as CartType;
-    for (let i = 0; i < items.length; i++) {
-      cart = await oms.addToCart(geinsCore, cartId, items[i] as CartItemInputType);      
-    }    
-    return cart;
+  let cart = {} as CartType;
+  for (let i = 0; i < items.length; i++) {
+    cart = await oms.addToCart(geinsCore, cartId, items[i] as CartItemInputType);      
+  }    
+  return cart;
 }
 
 export async function updateCart(
@@ -165,13 +173,13 @@ export async function removeFromCart(
   cartId: string,
   lineIds: string[]
 ): Promise<CartType| undefined> {
-    if(!cartId) {
-      return undefined;
-    }
+  if(!cartId) {
+    return undefined;
+  }
 
-    let cart = {} as CartType;
-    for (let i = 0; i < lineIds.length; i++) {
-      cart = await oms.removeFromCart(geinsCore, cartId, lineIds[i] as string);      
-    }
-    return cart;
+  let cart = {} as CartType;
+  for (let i = 0; i < lineIds.length; i++) {
+    cart = await oms.removeFromCart(geinsCore, cartId, lineIds[i] as string);      
+  }
+  return cart;
 }

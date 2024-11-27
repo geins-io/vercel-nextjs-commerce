@@ -13,8 +13,8 @@
     "test": "pnpm prettier:check"
   },
   "dependencies": {
-    "@geins/cms": "0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2",
-    "@geins/core": "0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2",
+    "@geins/cms": "^0.3.6",
+    "@geins/core": "^0.3.6",
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "clsx": "^2.1.1",
@@ -26,7 +26,7 @@
     "sonner": "^1.5.0"
   },
   "devDependencies": {
-    "@geins/types": "0.3.5-canary-31bd512aa7b845b28665ea45253d5e54c0097be2",
+    "@geins/types": "^0.3.6",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.13",
     "@types/node": "22.9.0",

@@ -2,18 +2,23 @@
 
 import { GeinsCore } from '@geins/core';
 import { cartAddMutation } from './queries/mutations/cart-add';
+
 import { cartUpdateMutation } from './queries/mutations/cart-line-update';
+import { checkoutMutation } from './queries/mutations/checkout';
 import { cartCreateQuery } from './queries/queries/cart-create';
 import { cartGetQuery } from './queries/queries/cart-get';
 import { CartItemInputType, CartItemType, CartType, PageType } from './types';
 
 const CURRENCY_CODE = process.env.GEINS_CURRENCY_CODE || 'USD';
 const IMAGE_URL = process.env.GEINS_IMAGE_URL || 'https://labs.commerce.services';
+const PAYMENT_ID = parseInt(process.env.GEINS_PAYMENT_ID || '23'):
 
 const reshapeCart = (geinsData: any): CartType => {    
+    
     if (!geinsData) {
         return {} as CartType;
     }
+
     const items: CartItemType[] = [];
     let totalQuantity = 0;
     geinsData.items?.forEach((item: any) => {
@@ -48,6 +53,7 @@ const reshapeCart = (geinsData: any): CartType => {
             }
         });
     });
+
     const vatSum = geinsData.summary.total.sellingPriceIncVat - geinsData.summary.total.sellingPriceExVat;
     const data = {
         id: geinsData.id || 'no-cart-id',
@@ -67,9 +73,37 @@ const reshapeCart = (geinsData: any): CartType => {
                 currencyCode: CURRENCY_CODE 
             },
         },
-        checkoutUrl: '#'    
+
+        checkoutUrl: '/checkout',    
     }
     return data;
+}
+
+const reshapeCheckout = (geinsData: any): PageType => {
+    const checkoutPage: PageType = {
+        id: 'checkout',
+        title: 'Checkout example',
+        handle: 'checkout',
+        body: '',
+        bodySummary: '',
+        seo: {
+            title: 'Checkout',
+            description: 'Checkout page',
+        },
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    };  
+
+    if (!geinsData || !geinsData.createOrUpdateCheckout) {
+        checkoutPage.body = 'No payment options available';
+        return checkoutPage;
+    }    
+    if(!geinsData.createOrUpdateCheckout.paymentOptions || geinsData.createOrUpdateCheckout.paymentOptions.length === 0) {
+        checkoutPage.body = 'No payment options available';
+        return checkoutPage;
+    }
+    checkoutPage.body = geinsData.createOrUpdateCheckout.paymentOptions[0].paymentData;          
+    return checkoutPage;
 }
 
 
@@ -117,24 +151,15 @@ export const updateCart = async (geinsCore: GeinsCore, id: string, item: CartIte
     return reshapeCart(data.updateCartItem);
 }
 
-export const getCheckoutPage = async (geinsCore: GeinsCore): Promise<PageType> => {
-    const checkoutPage: PageType = {
-        id: 'checkout',
-        title: 'Checkout',
-        handle: 'checkout',
-        body: `
-            <h1>Checkout</h1>
-        
-        `,
-        bodySummary: '',
-        seo: {
-            title: 'Checkout',
-            description: 'Checkout page',
-        },
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-    };  
-    return checkoutPage;
-
+export const getCheckoutPage = async (geinsCore: GeinsCore, cartId:string): Promise<PageType> => {
+    
+    const variables = { 
+        cartId: cartId,
+        checkout:{
+            paymentId: PAYMENT_ID            
+        }
+    };
+    const data = await geinsCore.graphql.mutation({ queryAsString: checkoutMutation, variables, requestOptions: { fetchPolicy: 'no-cache' }});
+    return reshapeCheckout(data);
 }
 

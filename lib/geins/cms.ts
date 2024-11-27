@@ -8,13 +8,6 @@ const reshapeMenu = (geinsMenu: GeinsMenuType,locationId: string) => {
     if(!geinsMenu.menuItems) {
         return [];
     }
-    const fixSlugUrl = (url: string) => {
-        if(url.indexOf('https') === 0) {
-            return url;
-        }
-        return 'https://'+url;
-    }
-    
     return geinsMenu.menuItems.map((item) => {       
         let itemPath = item?.canonicalUrl?.split('/').pop() || '';
         if(item?.type === 'category') {
@@ -28,6 +21,7 @@ const reshapeMenu = (geinsMenu: GeinsMenuType,locationId: string) => {
             path: itemPath || '',
         };
     });
+     
 }
 
 const reshapePage = (geinsPage: any, alias:string): PageType => {
@@ -73,12 +67,15 @@ const reshapePage = (geinsPage: any, alias:string): PageType => {
 
 
 
-export const getMenu = async (geinsCore: GeinsCore, locationId: string) : Promise<MenuItemType[]> => {        
+export const getMenu = async (geinsCore: GeinsCore, locationId: string) : Promise<MenuItemType[]> => {      
+      
     const geinsCMS = new GeinsCMS(geinsCore);
     const menu = await geinsCMS.menu.get({ menuLocationId: locationId }).then((result) => {        
         return result as GeinsMenuType;
     });
-    return reshapeMenu(menu,locationId);        
+   
+    
+    return reshapeMenu(menu, locationId);        
 }
     
 export const getPage = async (geinsCore: GeinsCore, alias: string) => {    

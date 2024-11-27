@@ -89,3 +89,50 @@ You can use this comprehensive [integration guide](https://vercel.com/docs/integ
     }
   }); */
   
+
+    })(this,'_klarnaCheckout','klarna-checkout-container',document);
+
+  /* <![CDATA[ */
+  var reloadCheckoutHandler;
+  (function(w,k,i,d,n,c,l){
+    w[k]=w[k]||function(){(w[k].q=w[k].q||[]).push(arguments)};
+    l=w[k].config={
+      container:w.document.getElementById(i),
+      ORDER_URL:'https://js.playground.klarna.com/eu/kco/checkout/orders/4f19679e-ebe7-4796-9bb6-a4ad0e0583f5',
+      AUTH_HEADER:'KlarnaCheckout i2a4qcj6bso53ghupgni',
+      IS_CANARY:false,
+      IS_IN_CLIENT_ROLLOUT:false,
+      LOCALE:'sv-SE',
+      ORDER_STATUS:'checkout_incomplete',
+      MERCHANT_NAME:'Playground Demo Merchant',
+      GUI_OPTIONS:[],
+      ALLOW_SEPARATE_SHIPPING_ADDRESS:false,
+      PURCHASE_COUNTRY:'swe',
+      PURCHASE_CURRENCY:'SEK',
+      TESTDRIVE:true,
+      BOOTSTRAP_SRC:'https://js.playground.klarna.com/kcoc/241108-848f85c/checkout.bootstrap.js',
+      FE_EVENTS_DISABLED:'false',      CLIENT_EVENT_HOST:'https://eu.playground.klarnaevt.com'
+    };
+    n=d.createElement('script');
+    c=d.getElementById(i);
+    n.async=!0;
+    n.src=l.BOOTSTRAP_SRC;
+    c.appendChild(n);
+    try{
+      ((w.Image && (new w.Image))||(d.createElement && d.createElement('img'))||{}).src =
+        l.CLIENT_EVENT_HOST + '/v1/checkout/snippet/load' +
+        '?sid=' + l.ORDER_URL.split('/').slice(-1) +
+        '&order_status=' + w.encodeURIComponent(l.ORDER_STATUS) +
+        '&timestamp=' + (new Date).getTime();
+    }catch(e){}
+    reloadCheckoutHandler = function () {
+        try{
+            ((w.Image && (new w.Image))||(d.createElement && d.createElement('img'))||{}).src =
+            l.CLIENT_EVENT_HOST+'/v1/checkout/snippet/reload?sid='+l.ORDER_URL.split('/').slice(-1)+
+            '&order_status='+w.encodeURIComponent(l.ORDER_STATUS)+'&timestamp='+(new Date()).getTime();
+            window.location.reload();
+        }catch(e){}
+    }
+  })(this,'_klarnaCheckout','klarna-checkout-container',document);
+  /* ]]> */
+  
