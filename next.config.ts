@@ -6,6 +6,11 @@ export default {
         protocol: 'https',
         hostname: 'labs.commerce.services',
         pathname: '/product/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'labs.commerce.services',
+        pathname: '/pagewidget/**'
       }
     ]
   }

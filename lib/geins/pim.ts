@@ -21,6 +21,7 @@ const CURRENCY_CODE = process.env.GEINS_CURRENCY_CODE || 'USD';
 const SHORT_DESCRIPTION = process.env.GEINS_PRODUCT_DESCRIPTION_SHORT_TEXT || 'text2';
 const LONG_DESCRIPTION = process.env.GEINS_PRODUCT_DESCRIPTION_LONG_TEXT || 'text1';
 const IMAGE_URL = process.env.GEINS_IMAGE_URL || 'https://labs.commerce.services';
+const DEFAULT_SKU_VARIATION = process.env.GEINS_SKU_DEFAULT_VARIATION || 'Size';
 
 const translateSortKey = (sortKey: string, reverse: boolean): string => {
   switch (sortKey) {
@@ -87,8 +88,9 @@ const reshapeProducts = (geinsData: any): ProductType[] => {
 };
 
 const reshapeProduct = (geinsProductData: any): ProductType => {   
-  const rawProduct = geinsProductData;
-  // add categories and relations and brand to tags
+  const rawProduct = geinsProductData;  
+  
+
   const tags: string[] = [];
   const relations: ProductRelationType[] = [];   
   if (rawProduct.primaryCategory) {
@@ -134,31 +136,13 @@ const reshapeProduct = (geinsProductData: any): ProductType => {
   }));
 
   // add variations and options
-  const variations: ProductVariantType[] = [];   
-  rawProduct.skus?.forEach((sku: any) => {
-    const variant = {
-      id: sku.skuId,
-      title: sku.name,
-      availableForSale: sku.stock?.totalStock > 0 || false,
-      selectedOptions: [{ name: 'Size', value: sku.name }],
-      price: rawProduct.unitPrice.sellingPriceIncVat,
-    } as ProductVariantType;
-
-  const exists = variations?.find((v) => v.title === sku.name);
-    if (!exists) {
-      variations.push(variant);
-    }
-  });
+  let variations: ProductVariantType[] = []; 
+  let options: ProductOptionType[] = [];
   
-  const optionsValues = variations?.map((sku: any) => {
-    return sku.title
-  });
-
-  const options = {
-    id: rawProduct.productId,
-    name: 'Size',
-    values: [...optionsValues],
-  } as ProductOptionType
+  if(rawProduct.variantGroup) {
+    variations = [...reshapeProductVariations(rawProduct)];   
+    options = [...reshapeProductOptions(variations)];
+  }   
 
   return {
     id: rawProduct.productId,
@@ -185,14 +169,13 @@ const reshapeProduct = (geinsProductData: any): ProductType => {
       },
     },
     price: rawProduct.unitPrice.sellingPriceIncVat,
-    currency: CURRENCY_CODE,
-    
+    currency: CURRENCY_CODE,    
     stockTracking: !!rawProduct.totalStock,
     stockPurchasable: rawProduct.totalStock?.inStock || false,
     stockLevel: rawProduct.totalStock?.totalStock || 0,
     availableForSale: true,
     tags: tags || [],
-    options: [options]|| [],
+    options: [...options]|| [],
     variants: variations || [],
     featuredImage: images[0],
     images: images,
@@ -200,7 +183,112 @@ const reshapeProduct = (geinsProductData: any): ProductType => {
   };    
 };
 
+const reshapeProductOptions = (variants: any[]): ProductOptionType[] => {  
+    const optionsMap: Record<string, { id: string; name: string; values: Set<string> }> = {};
+  
+    variants.forEach((variant) => {
+      if (variant.selectedOptions && Array.isArray(variant.selectedOptions)) {
+        variant.selectedOptions.forEach((option: { name: string; value: string }) => {
+          // Ensure `optionsMap[option.name]` is initialized
+          if (!optionsMap[option.name]) {
+            optionsMap[option.name] = {
+              id: option.name.toLowerCase(),
+              name: option.name,
+              values: new Set(),
+            };
+          }
+          // Now it is safe to access `optionsMap[option.name].values`
+          optionsMap[option.name]?.values.add(option.value);
+        });
+      }
+    });
+  
+    // Convert the map to an array and transform the Set of values to an array
+    return Object.values(optionsMap).map((option) => ({
+      id: option.id,
+      name: option.name,
+      values: Array.from(option.values),
+    }));
+};
 
+const reshapeSkusToVariants = (skus: any[]): ProductVariantType[] => {
+  return skus.map((sku) => ({
+    id: sku.skuId.toString(),
+    title: sku.name,
+    availableForSale: sku.stock?.totalStock > 0 || false,
+    selectedOptions: [{ name: DEFAULT_SKU_VARIATION, value: sku.name }],
+    price: {
+      amount: '0',
+      currencyCode: CURRENCY_CODE,
+    },
+  }));
+}
+
+const reshapeProductVariations = (geinsProductData: any): ProductVariantType[] => {  
+  // filter out the default product from dimensions
+  const dimensions = geinsProductData.variantDimensions.filter((dimension: any) => dimension.dimension !== 'DefaultProduct');  
+  if(dimensions.length === 0) {    
+    return reshapeSkusToVariants(geinsProductData.skus);     
+  }
+
+
+
+  const buildVariantsArray = (variants: any[], selectedOptions: any[] = [], parent: any = undefined): any[] => {
+    const result: any[] = []; // Collect the final results here
+  
+    if (!Array.isArray(variants)) {
+      return result; // Safeguard against invalid input
+    }
+  
+    for (const variant of variants) {
+      // Look ahead to check if the current variant is DefaultSku with a single value
+      const hasNextLevel = Array.isArray(variant.variants) && variant.variants.length > 0;
+
+      
+     
+
+  
+      // Create the current option
+      const newSelectedOptions = [...selectedOptions];
+      const currentOption = {
+        name: variant.dimension,
+        value: variant.value,
+      };
+      newSelectedOptions.push(currentOption);
+
+      
+
+      if (hasNextLevel) {       
+        const nestedResults = buildVariantsArray(variant.variants, newSelectedOptions, variant);
+        result.push(...nestedResults); 
+      } else {
+        const hasOnlyOneOption = (parent && parent.variants.length === 1 && variant.dimension === 'DefaultSku') || false;
+        if(hasOnlyOneOption) {
+          newSelectedOptions.pop();
+        }
+
+        result.push({
+          id: variant.skuId.toString(),
+          title: newSelectedOptions.map((opt) => opt.value).join(","),
+          availableForSale: variant.stock?.totalStock > 0 || false, // Handle stock availability
+          selectedOptions: newSelectedOptions,
+          price: {
+            amount: '',
+            currencyCode: CURRENCY_CODE, // Replace with actual currency code
+          },
+        });
+      }
+    
+    }
+  
+    return result;
+  };
+  const reshapedVariants = buildVariantsArray(geinsProductData.variantGroup.variants);
+
+  return reshapedVariants;
+  
+
+}
 
 const pim = {
 
@@ -220,16 +308,14 @@ const pim = {
   },
 
   getProduct: async (geinsCore: GeinsCore, slug: string): Promise<ProductType | undefined> => {
-      const variables = {
+    const variables = {
           alias: slug,
       };
-     
       const data = await geinsCore.graphql.query({ queryAsString: productQuery, variables });  
       if(!data.product) {
           return undefined;
       }
       const reshaped = reshapeProduct(data.product);
-      // console.log('*** reshaped', reshaped);
       return reshaped;
   },
 
@@ -297,8 +383,8 @@ const pim = {
           },          
           ...(take && { take }),          
           ...(skip && { skip }),
-      };
-      const data = await geinsCore.graphql.query({ queryAsString: productsQuery, variables });
+      };      
+      const data = await geinsCore.graphql.query({ queryAsString: productsQuery, variables, requestOptions: { fetchPolicy: 'no-cache' } });
       if(!data || !data.products || !data.products.products) {
           return [];
       }

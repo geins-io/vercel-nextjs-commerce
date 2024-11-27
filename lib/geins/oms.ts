@@ -5,7 +5,7 @@ import { cartAddMutation } from './queries/mutations/cart-add';
 import { cartUpdateMutation } from './queries/mutations/cart-line-update';
 import { cartCreateQuery } from './queries/queries/cart-create';
 import { cartGetQuery } from './queries/queries/cart-get';
-import { CartItemInputType, CartItemType, CartType } from './types';
+import { CartItemInputType, CartItemType, CartType, PageType } from './types';
 
 const CURRENCY_CODE = process.env.GEINS_CURRENCY_CODE || 'USD';
 const IMAGE_URL = process.env.GEINS_IMAGE_URL || 'https://labs.commerce.services';
@@ -69,26 +69,6 @@ const reshapeCart = (geinsData: any): CartType => {
         },
         checkoutUrl: '#'    
     }
-
-/*     console.log('');
-    console.log('-------- RAW DATA');
-   if(geinsData.items){
-    console.log(geinsData.items);
-    console.log('');
-    } else {
-        console.log('NO ITEMS');
-    }
-  
-    console.log('-------------------');
-    console.log('');
-    console.log('');
-       
-    console.log('*** reshapeCart data');
-    console.log(data);
-    console.log('*******************');
-    console.log('');
-    console.log('');
-    console.log('');  */
     return data;
 }
 
@@ -104,7 +84,6 @@ export const createCart = async (geinsCore: GeinsCore): Promise<any>  => {
 export const getCart=  async (geinsCore: GeinsCore, id: string | undefined): Promise<any> => {
     const data = await geinsCore.graphql.query({ queryAsString: cartGetQuery, variables: { id }, requestOptions: { fetchPolicy: 'no-cache' }});
     if(!data || !data.getCart) {
-        console.log('*** NO CART data:', data);
         return {};
     }
     return reshapeCart(data.getCart);
@@ -113,7 +92,6 @@ export const getCart=  async (geinsCore: GeinsCore, id: string | undefined): Pro
 export const addToCart = async (geinsCore: GeinsCore, id: string, item: CartItemInputType): Promise<any> => {
     const data = await geinsCore.graphql.mutation({ queryAsString: cartAddMutation, variables:{id: id, item: item,}, requestOptions: { fetchPolicy: 'no-cache' }});      
     if(!data || !data.addToCart) {
-        console.log('*** NO CART data:', data);
         return {};
     }
     return reshapeCart(data.addToCart);
@@ -126,17 +104,37 @@ export const removeFromCart = async (geinsCore: GeinsCore, id: string, itemId: s
     };
     const data = await geinsCore.graphql.mutation({ queryAsString: cartUpdateMutation, variables:{id, item }, requestOptions: { fetchPolicy: 'no-cache' }});      
     if(!data || !data.updateCartItem) {
-        console.log('*** NO CART data:', data);
         return {};
     }
     return reshapeCart(data.updateCartItem);
 }
 
-export const updateCart=  async (geinsCore: GeinsCore, id: string, item: CartItemInputType): Promise<any> => {
+export const updateCart = async (geinsCore: GeinsCore, id: string, item: CartItemInputType): Promise<any> => {
     const data = await geinsCore.graphql.mutation({ queryAsString: cartUpdateMutation, variables:{id, item }, requestOptions: { fetchPolicy: 'no-cache' }});      
     if(!data || !data.updateCartItem) {
-        console.log('*** NO CART data:', data);
         return {};
     }
     return reshapeCart(data.updateCartItem);
 }
+
+export const getCheckoutPage = async (geinsCore: GeinsCore): Promise<PageType> => {
+    const checkoutPage: PageType = {
+        id: 'checkout',
+        title: 'Checkout',
+        handle: 'checkout',
+        body: `
+            <h1>Checkout</h1>
+        
+        `,
+        bodySummary: '',
+        seo: {
+            title: 'Checkout',
+            description: 'Checkout page',
+        },
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    };  
+    return checkoutPage;
+
+}
+

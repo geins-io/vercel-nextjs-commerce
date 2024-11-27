@@ -56,6 +56,22 @@ export type CategoryItemType = {
   updatedAt?: string;
 };
 
+
+export enum ProductRelationTypeEnum {
+  BRAND = 'BRAND',
+  CATEGORY= 'CATEGORY',
+  RELATED = 'RELATED',
+  SIMILAR = 'SIMILAR',
+  CROSS_SELL = 'CROSS_SELL',
+  UP_SELL = 'UP_SELL',
+}
+
+export type ProductRelationType = {
+  type: ProductRelationTypeEnum;
+  name: string;
+  alias: string;
+}
+
 export type MoneyType = {
   amount: string;
   currencyCode: string;
@@ -95,22 +111,6 @@ export type ProductType = {
   relations?: ProductRelationType[];
 };
 
-// enum for relationType
-export enum ProductRelationTypeEnum {
-  BRAND = 'BRAND',
-  CATEGORY= 'CATEGORY',
-  RELATED = 'RELATED',
-  SIMILAR = 'SIMILAR',
-  CROSS_SELL = 'CROSS_SELL',
-  UP_SELL = 'UP_SELL',
-}
-
-export type ProductRelationType = {
-  type: ProductRelationTypeEnum;
-  name: string;
-  alias: string;
-}
-
 
 export type ProductOptionType = {
   id: string;
@@ -118,11 +118,6 @@ export type ProductOptionType = {
   values: string[];
 };
 
-export type ProductOptionValueType = {
-  id: string;
-  name: string;
-  price: number;
-};
 
 
 export type ProductVariantType = {
@@ -135,6 +130,8 @@ export type ProductVariantType = {
   }[];
   price: MoneyType;
 };
+
+
 
 
 export type ProductImageType = {
@@ -192,6 +189,6 @@ export type CartProductType = {
 
 export type CartItemInputType = {
   id?: string;
-  skuId?: string; 
+  skuId?: number; 
   quantity: number 
 }

@@ -70,3 +70,22 @@ Your app should now be running on [localhost:3000](http://localhost:3000/).
 ## Vercel, Next.js Commerce, and Shopify Integration Guide
 
 You can use this comprehensive [integration guide](https://vercel.com/docs/integrations/ecommerce/shopify) with step-by-step instructions on how to configure Shopify as a headless CMS using Next.js Commerce as your headless Shopify storefront on Vercel.
+
+
+
+
+/*   rawProduct.skus?.forEach((sku: any) => {
+    const variant = {
+      id: sku.skuId,
+      title: sku.name,
+      availableForSale: sku.stock?.totalStock > 0 || false,
+      selectedOptions: [{ name: 'Size', value: sku.name }],
+      price: rawProduct.unitPrice.sellingPriceIncVat,
+    } as ProductVariantType;
+
+  const exists = variations?.find((v) => v.title === sku.name);
+    if (!exists) {
+      variations.push(variant);
+    }
+  }); */
+  

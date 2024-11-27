@@ -72,9 +72,6 @@ export function AddToCart({ product }: { product: ProductType }) {
   const selectedVariantId = variant?.id || defaultVariantId;
   const actionWithVariant = formAction.bind(null, selectedVariantId);
   const finalVariant = variants.find((variant) => variant.id === selectedVariantId)!;
-
-  // console.log('*** Add-To-Cart.tsx', product);
-
   return (
     <form
       action={async () => {
