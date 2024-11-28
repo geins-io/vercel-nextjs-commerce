@@ -185,7 +185,6 @@ const reshapeProductOptions = (variants: any[]): ProductOptionType[] => {
   variants.forEach((variant) => {
     if (variant.selectedOptions && Array.isArray(variant.selectedOptions)) {
       variant.selectedOptions.forEach((option: { name: string; value: string }) => {
-        // Ensure `optionsMap[option.name]` is initialized
         if (!optionsMap[option.name]) {
           optionsMap[option.name] = {
             id: option.name.toLowerCase(),
@@ -193,13 +192,12 @@ const reshapeProductOptions = (variants: any[]): ProductOptionType[] => {
             values: new Set()
           };
         }
-        // Now it is safe to access `optionsMap[option.name].values`
         optionsMap[option.name]?.values.add(option.value);
       });
     }
   });
 
-  // Convert the map to an array and transform the Set of values to an array
+
   return Object.values(optionsMap).map((option) => ({
     id: option.id,
     name: option.name,
@@ -221,7 +219,7 @@ const reshapeSkusToVariants = (skus: any[]): ProductVariantType[] => {
 };
 
 const reshapeProductVariations = (geinsProductData: any): ProductVariantType[] => {
-  // filter out the default product from dimensions
+
   const dimensions = geinsProductData.variantDimensions.filter(
     (dimension: any) => dimension.dimension !== 'DefaultProduct'
   );
@@ -234,20 +232,18 @@ const reshapeProductVariations = (geinsProductData: any): ProductVariantType[] =
     selectedOptions: any[] = [],
     parent: any = undefined
   ): any[] => {
-    const result: any[] = []; // Collect the final results here
+    const result: any[] = []; 
 
     if (!Array.isArray(variants)) {
-      return result; // Safeguard against invalid input
+      return result; 
     }
 
     for (const variant of variants) {
-      // Look ahead to check if the current variant is DefaultSku with a single value
       const hasNextLevel = Array.isArray(variant.variants) && variant.variants.length > 0;
-
-      // Create the current option
       const newSelectedOptions = [...selectedOptions];
       const currentOption = {
-        name: variant.dimension,
+
+        name: variant.dimension === 'DefaultSku' ? DEFAULT_SKU_VARIATION : variant.dimension,
         value: variant.value
       };
       newSelectedOptions.push(currentOption);
@@ -314,8 +310,8 @@ export const reshapeCart = (geinsData: any): CartType => {
             altText: item.product.name,
             url: `${IMAGE_URL}/product/100f125/${item.product.productImages[0].fileName}`,
             src: `${IMAGE_URL}/product/100f125/${item.product.productImages[0].fileName}`,
-            height: 1600,
-            width: 2000
+            height: 100,
+            width: 125
           }
         }
       }
