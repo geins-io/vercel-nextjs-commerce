@@ -1,5 +1,5 @@
 const metaFragment = /* GraphQL */ `
-  fragment Meta on MetadataType {  
+  fragment Meta on MetadataType {
     title
     description
   }

@@ -26,7 +26,7 @@ export default function CartModal() {
   const [isOpen, setIsOpen] = useState(false);
   const quantityRef = useRef(cart?.totalQuantity);
   const openCart = () => setIsOpen(true);
-  const closeCart = () => setIsOpen(false);  
+  const closeCart = () => setIsOpen(false);
 
   useEffect(() => {
     if (!cart) {

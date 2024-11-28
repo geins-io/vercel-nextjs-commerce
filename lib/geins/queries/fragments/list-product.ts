@@ -25,7 +25,6 @@ const listProductFragment = /* GraphQL */ `
     totalStock {
       ...Stock
     }
-
   }
   ${priceFragment}
   ${stockFragment}

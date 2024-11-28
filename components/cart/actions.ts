@@ -8,8 +8,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export async function addItem(prevState: any, selectedVariantId: string | undefined) {
-
-  let cartId = (await cookies()).get('cartId')?.value;  
+  let cartId = (await cookies()).get('cartId')?.value;
   if (!cartId || !selectedVariantId) {
     return 'Error adding item to cart';
   }

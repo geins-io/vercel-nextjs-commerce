@@ -5,7 +5,7 @@
     "pnpm": ">=9"
   },
   "scripts": {
-    "dev": "next dev --turbo --port 3088",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "prettier": "prettier --write --ignore-unknown .",

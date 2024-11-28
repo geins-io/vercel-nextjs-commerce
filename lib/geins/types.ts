@@ -8,6 +8,48 @@ export type Edge<T> = {
   node: T;
 };
 
+export type CartType = {
+  id: string | undefined;
+  checkoutUrl: string;
+  cost: {
+    subtotalAmount: MoneyType;
+    totalAmount: MoneyType;
+    totalTaxAmount: MoneyType;
+  };
+  totalQuantity: number;
+  lines: CartItemType[];
+};
+
+export type CartProductType = {
+  id: string;
+  handle: string;
+  title: string;
+  featuredImage: ProductImageType;
+};
+
+export type CartItemType = {
+  id: string | undefined;
+  quantity: number;
+  cost: {
+    totalAmount: MoneyType;
+  };
+  merchandise: {
+    id: string;
+    title: string;
+    selectedOptions: {
+      name: string;
+      value: string;
+    }[];
+    product: CartProductType;
+  };
+};
+
+export type CartItemInputType = {
+  id?: string;
+  skuId?: number;
+  quantity: number;
+};
+
 export type SeoType = {
   title: string;
   description: string;
@@ -20,7 +62,6 @@ export type CollectionType = {
   handle: string;
   seo?: SeoType;
 };
-
 
 export type PageType = {
   id: string;
@@ -36,7 +77,7 @@ export type PageType = {
 export type MenuType = {
   id: string;
   title?: string;
-  name: string;  
+  name: string;
   items: MenuItemType[];
 };
 
@@ -56,27 +97,25 @@ export type CategoryItemType = {
   updatedAt?: string;
 };
 
-
 export enum ProductRelationTypeEnum {
   BRAND = 'BRAND',
-  CATEGORY= 'CATEGORY',
+  CATEGORY = 'CATEGORY',
   RELATED = 'RELATED',
   SIMILAR = 'SIMILAR',
   CROSS_SELL = 'CROSS_SELL',
-  UP_SELL = 'UP_SELL',
+  UP_SELL = 'UP_SELL'
 }
 
 export type ProductRelationType = {
   type: ProductRelationTypeEnum;
   name: string;
   alias: string;
-}
+};
 
 export type MoneyType = {
   amount: string;
   currencyCode: string;
 };
-
 
 export type ProductType = {
   id: string;
@@ -111,14 +150,11 @@ export type ProductType = {
   relations?: ProductRelationType[];
 };
 
-
 export type ProductOptionType = {
   id: string;
   name: string;
   values: string[];
 };
-
-
 
 export type ProductVariantType = {
   id: string;
@@ -130,9 +166,6 @@ export type ProductVariantType = {
   }[];
   price: MoneyType;
 };
-
-
-
 
 export type ProductImageType = {
   caption: string;
@@ -149,46 +182,3 @@ export type ImageType = {
   width: number;
   height: number;
 };
-
-export type CartType = {
-  id: string | undefined;
-  checkoutUrl: string;
-  cost: {
-    subtotalAmount: MoneyType;
-    totalAmount: MoneyType;
-    totalTaxAmount: MoneyType;
-  };
-  totalQuantity: number;
-  lines: CartItemType[];
-};
-
-
-export type CartItemType = {
-  id: string | undefined;
-  quantity: number;
-  cost: {
-    totalAmount: MoneyType;
-  };
-  merchandise: {
-    id: string;
-    title: string;
-    selectedOptions: {
-      name: string;
-      value: string;
-    }[];
-    product: CartProductType;
-  };
-};
-
-export type CartProductType = {
-  id: string;
-  handle: string;
-  title: string;
-  featuredImage: ProductImageType;
-};
-
-export type CartItemInputType = {
-  id?: string;
-  skuId?: number; 
-  quantity: number 
-}

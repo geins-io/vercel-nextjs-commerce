@@ -113,7 +113,6 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
 async function RelatedProducts({ product }: { product: ProductType }) {
   const relatedProducts = await getProductRecommendations(product);
 
-
   if (!relatedProducts.length) return null;
 
   return (

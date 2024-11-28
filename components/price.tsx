@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-const locale = process.env.GEINS_LOCALE || 'en-US'; 
+const locale = process.env.GEINS_LOCALE || 'en-US';
 const Price = ({
   amount,
   className,

@@ -5,20 +5,9 @@ import skuFragment from '../fragments/sku';
 import stockFragment from '../fragments/stock';
 import variantFragment from '../fragments/variant';
 
-
 export const productQuery = /* GraphQL */ `
-  query product(
-    $alias: String!
-    $channelId: String
-    $languageId: String
-    $marketId: String
-  ) {
-    product(
-      alias: $alias
-      channelId: $channelId
-      languageId: $languageId
-      marketId: $marketId
-    ) {
+  query product($alias: String!, $channelId: String, $languageId: String, $marketId: String) {
+    product(alias: $alias, channelId: $channelId, languageId: $languageId, marketId: $marketId) {
       productId
       alias
       articleNumber
@@ -42,7 +31,7 @@ export const productQuery = /* GraphQL */ `
       }
       categories {
         name
-        alias        
+        alias
       }
       unitPrice {
         ...Price
@@ -93,7 +82,6 @@ export const productQuery = /* GraphQL */ `
         voteCount
       }
     }
-  
   }
   ${priceFragment}
   ${stockFragment}

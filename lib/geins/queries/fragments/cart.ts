@@ -3,105 +3,105 @@ import priceFragment from './price';
 import stockFragment from './stock';
 
 const cartFragment = /* GraphQL */ `
-    fragment Cart on CartType {
+  fragment Cart on CartType {
     id
     promoCode
     appliedCampaigns {
-        ...Campaign
+      ...Campaign
     }
     items {
-        id
-        campaign {
+      id
+      campaign {
         appliedCampaigns {
-            ...Campaign
+          ...Campaign
         }
         prices {
-            price {
+          price {
             ...Price
-            }
-            quantity
+          }
+          quantity
         }
-        }
-        unitPrice {
+      }
+      unitPrice {
         ...Price
-        }
-        product {
+      }
+      product {
         productId
         articleNumber
         brand {
-            name
+          name
         }
         name
         productImages {
-            fileName
+          fileName
         }
         alias
         canonicalUrl
         primaryCategory {
-            name
+          name
         }
         skus {
-            skuId
-            name
-            stock {
+          skuId
+          name
+          stock {
             ...Stock
-            }
+          }
         }
         unitPrice {
-            ...Price
+          ...Price
         }
-        }
-        quantity
-        skuId
-        totalPrice {
+      }
+      quantity
+      skuId
+      totalPrice {
         ...Price
-        }
+      }
     }
     summary {
-        fixedAmountDiscountIncVat
-        fixedAmountDiscountExVat
-        balance {
-            pending
-            pendingFormatted
-            totalSellingPriceExBalanceExVat
-            totalSellingPriceExBalanceIncVat
-            totalSellingPriceExBalanceIncVatFormatted
-        }
-        subTotal {
-            regularPriceIncVatFormatted
-            regularPriceExVatFormatted
-            sellingPriceIncVatFormatted
-            sellingPriceExVatFormatted
-            sellingPriceExVat
-            sellingPriceIncVat
-            vat
-        }
-        shipping {
-            amountLeftToFreeShipping
-            amountLeftToFreeShippingFormatted
-            feeExVatFormatted
-            feeIncVatFormatted
-            feeIncVat
-            feeExVat
-            isDefault
-        }
-        total {
-            isDiscounted
-            sellingPriceIncVatFormatted
-            sellingPriceExVatFormatted
-            sellingPriceIncVat
-            sellingPriceExVat
-            discountIncVatFormatted
-            discountExVatFormatted
-            discountExVat
-            discountIncVat
-            vatFormatted
-            vat
-        }
+      fixedAmountDiscountIncVat
+      fixedAmountDiscountExVat
+      balance {
+        pending
+        pendingFormatted
+        totalSellingPriceExBalanceExVat
+        totalSellingPriceExBalanceIncVat
+        totalSellingPriceExBalanceIncVatFormatted
+      }
+      subTotal {
+        regularPriceIncVatFormatted
+        regularPriceExVatFormatted
+        sellingPriceIncVatFormatted
+        sellingPriceExVatFormatted
+        sellingPriceExVat
+        sellingPriceIncVat
+        vat
+      }
+      shipping {
+        amountLeftToFreeShipping
+        amountLeftToFreeShippingFormatted
+        feeExVatFormatted
+        feeIncVatFormatted
+        feeIncVat
+        feeExVat
+        isDefault
+      }
+      total {
+        isDiscounted
+        sellingPriceIncVatFormatted
+        sellingPriceExVatFormatted
+        sellingPriceIncVat
+        sellingPriceExVat
+        discountIncVatFormatted
+        discountExVatFormatted
+        discountExVat
+        discountIncVat
+        vatFormatted
+        vat
+      }
     }
-    }
-    ${priceFragment}
-    ${stockFragment}
-    ${campaignFragment}
+  }
+  ${priceFragment}
+  ${stockFragment}
+  ${campaignFragment}
 `;
 export default cartFragment;

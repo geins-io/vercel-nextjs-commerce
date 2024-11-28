@@ -26,7 +26,6 @@ export function VariantSelector({
     return null;
   }
 
-
   const combinations: Combination[] = variants.map((variant) => ({
     id: variant.id,
     availableForSale: variant.availableForSale,
@@ -35,9 +34,6 @@ export function VariantSelector({
       {}
     )
   }));
-
- 
-  
 
   return options.map((option) => (
     <form key={option.id}>

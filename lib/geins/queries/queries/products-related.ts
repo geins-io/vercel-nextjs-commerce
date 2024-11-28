@@ -16,29 +16,28 @@ export const relatedProductsQuery = /* GraphQL */ `
       languageId: $languageId
       marketId: $marketId
     ) {
-        alias
+      alias
+      name
+      canonicalUrl
+      brand {
         name
-        canonicalUrl
-        brand {
-          name
-        }
-        unitPrice {
-          ...Price
-        }
-        relationType
-        productImages {
-          fileName
-        }
-        primaryImage
-        primaryCategory {
-          name
-        }
-        skus {
-          ...Sku
-        } 
+      }
+      unitPrice {
+        ...Price
+      }
+      relationType
+      productImages {
+        fileName
+      }
+      primaryImage
+      primaryCategory {
+        name
+      }
+      skus {
+        ...Sku
+      }
     }
   }
   ${priceFragment}
   ${skuFragment}
-  
 `;

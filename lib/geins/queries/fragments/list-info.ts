@@ -6,7 +6,7 @@ const listInfoFragment = /* GraphQL */ `
     alias
     canonicalUrl
     primaryImage
-    name  
+    name
     primaryDescription
     secondaryDescription
     hideTitle
