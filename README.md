@@ -1,138 +1,70 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fcommerce&project-name=commerce&repo-name=commerce&demo-title=Next.js%20Commerce&demo-url=https%3A%2F%2Fdemo.vercel.store&demo-image=https%3A%2F%2Fbigcommerce-demo-asset-ksvtgfvnd.vercel.app%2Fbigcommerce.png&env=COMPANY_NAME,SHOPIFY_REVALIDATION_SECRET,SHOPIFY_STORE_DOMAIN,SHOPIFY_STOREFRONT_ACCESS_TOKEN,SITE_NAME,TWITTER_CREATOR,TWITTER_SITE)
+ # Next.js Commerce x Geins
 
-# Next.js Commerce
+A high-performance, server-rendered Next.js (15 RC) App Router ecommerce application.
 
-A high-performance, server-rendered Next.js App Router ecommerce application.
+This template showcases the integration of [Geins Commerce API](https://docs.geins.io) with [Next.js Commerce](https://github.com/vercel/commerce), leveraging the open-source [Geins SDK](https://github.com/geins-io/geins).
 
-This template uses React Server Components, Server Actions, `Suspense`, `useOptimistic`, and more.
+## Features
 
-<h3 id="v1-note"></h3>
+- **React Server Components**: Build fast and scalable UIs with Next.js's server-first approach.
+- **Server Actions**: Simplify backend logic and data fetching.
+- **Modern React APIs**: Including `Suspense` and `useOptimistic`.
+- **Integration with Geins**: Harness the power of Geins for exceptional ecommerce capabilities.
 
-> Note: Looking for Next.js Commerce v1? View the [code](https://github.com/vercel/commerce/tree/v1), [demo](https://commerce-v1.vercel.store), and [release notes](https://github.com/vercel/commerce/releases/tag/v1).
+## What is Geins?
 
-## Providers
+[Geins](https://geins.io/) is the ultimate toolkit for modern commerce. With Geins, developers and agencies can craft unique, tailored shopping experiences using:
 
-Vercel will only be actively maintaining a Shopify version [as outlined in our vision and strategy for Next.js Commerce](https://github.com/vercel/commerce/pull/966).
+- A hybrid model combining the reliability of a managed platform with open-source flexibility.
+- A robust API-first approach enabling precise customization.
+- Features for managing channels, content, CRM, events, and more.
 
-Vercel is happy to partner and work with any commerce provider to help them get a similar template up and running and listed below. Alternative providers should be able to fork this repository and swap out the `lib/shopify` file with their own implementation while leaving the rest of the template mostly unchanged.
+Explore the [Geins Commerce API documentation](https://docs.geins.io) for detailed usage instructions and capabilities.
 
-- Shopify (this repository)
-- [BigCommerce](https://github.com/bigcommerce/nextjs-commerce) ([Demo](https://next-commerce-v2.vercel.app/))
-- [Ecwid by Lightspeed](https://github.com/Ecwid/ecwid-nextjs-commerce/) ([Demo](https://ecwid-nextjs-commerce.vercel.app/))
-- [Medusa](https://github.com/medusajs/vercel-commerce) ([Demo](https://medusa-nextjs-commerce.vercel.app/))
-- [Saleor](https://github.com/saleor/nextjs-commerce) ([Demo](https://saleor-commerce.vercel.app/))
-- [Shopware](https://github.com/shopwareLabs/vercel-commerce) ([Demo](https://shopware-vercel-commerce-react.vercel.app/))
-- [Swell](https://github.com/swellstores/verswell-commerce) ([Demo](https://verswell-commerce.vercel.app/))
-- [Umbraco](https://github.com/umbraco/Umbraco.VercelCommerce.Demo) ([Demo](https://vercel-commerce-demo.umbraco.com/))
-- [Wix](https://github.com/wix/nextjs-commerce) ([Demo](https://wix-nextjs-commerce.vercel.app/))
+## Getting Started
 
-> Note: Providers, if you are looking to use similar products for your demo, you can [download these assets](https://drive.google.com/file/d/1q_bKerjrwZgHwCw0ovfUMW6He9VtepO_/view?usp=sharing).
+To run this application locally, follow these steps:
 
-## Integrations
+### Prerequisites
 
-Integrations enable upgraded or additional functionality for Next.js Commerce
+Ensure you have the following installed:
 
-- [Orama](https://github.com/oramasearch/nextjs-commerce) ([Demo](https://vercel-commerce.oramasearch.com/))
+- [Node.js](https://nodejs.org/)
+- [Geins API-Key](https://geins.io/)
 
-  - Upgrades search to include typeahead with dynamic re-rendering, vector-based similarity search, and JS-based configuration.
-  - Search runs entirely in the browser for smaller catalogs or on a CDN for larger.
+### Environment Variables
 
-- [React Bricks](https://github.com/ReactBricks/nextjs-commerce-rb) ([Demo](https://nextjs-commerce.reactbricks.com/))
-  - Edit pages, product details, and footer content visually using [React Bricks](https://www.reactbricks.com) visual headless CMS.
+Set up your environment variables as defined in `.env.example`. It's recommended to use [Vercel's Environment Variables](https://vercel.com/docs/concepts/projects/environment-variables) for secure storage.
 
-## Running locally
+> ⚠️ **Important**: Never commit your `.env` file to version control.
 
-You will need to use the environment variables [defined in `.env.example`](.env.example) to run Next.js Commerce. It's recommended you use [Vercel Environment Variables](https://vercel.com/docs/concepts/projects/environment-variables) for this, but a `.env` file is all that is necessary.
+### Steps to Run Locally
 
-> Note: You should not commit your `.env` file or it will expose secrets that will allow others to control your Shopify store.
+1. Clone this repository:
 
-1. Install Vercel CLI: `npm i -g vercel`
-2. Link local instance with Vercel and GitHub accounts (creates `.vercel` directory): `vercel link`
-3. Download your environment variables: `vercel env pull`
+   ```bash
+   git clone https://github.com/geins-io/vercel-nextjs-commerce.git
+   cd <your-repo>
+   ```
 
-```bash
-pnpm install
-pnpm dev
-```
+2. Install dependencies:
 
-Your app should now be running on [localhost:3000](http://localhost:3000/).
+   ```bash
+   pnpm install
+   ```
 
-<details>
-  <summary>Expand if you work at Vercel and want to run locally and / or contribute</summary>
+3. Link your local instance with Vercel and pull environment variables:
 
-1. Run `vc link`.
-1. Select the `Vercel Solutions` scope.
-1. Connect to the existing `commerce-shopify` project.
-1. Run `vc env pull` to get environment variables.
-1. Run `pnpm dev` to ensure everything is working correctly.
-</details>
+   ```bash
+   npm i -g vercel
+   vercel link
+   vercel env pull
+   ```
 
-## Vercel, Next.js Commerce, and Shopify Integration Guide
+4. Start the development server:
 
-You can use this comprehensive [integration guide](https://vercel.com/docs/integrations/ecommerce/shopify) with step-by-step instructions on how to configure Shopify as a headless CMS using Next.js Commerce as your headless Shopify storefront on Vercel.
+   ```bash
+   pnpm dev
+   ```
 
-
-
-
-/*   rawProduct.skus?.forEach((sku: any) => {
-    const variant = {
-      id: sku.skuId,
-      title: sku.name,
-      availableForSale: sku.stock?.totalStock > 0 || false,
-      selectedOptions: [{ name: 'Size', value: sku.name }],
-      price: rawProduct.unitPrice.sellingPriceIncVat,
-    } as ProductVariantType;
-
-  const exists = variations?.find((v) => v.title === sku.name);
-    if (!exists) {
-      variations.push(variant);
-    }
-  }); */
-  
-
-    })(this,'_klarnaCheckout','klarna-checkout-container',document);
-
-  /* <![CDATA[ */
-  var reloadCheckoutHandler;
-  (function(w,k,i,d,n,c,l){
-    w[k]=w[k]||function(){(w[k].q=w[k].q||[]).push(arguments)};
-    l=w[k].config={
-      container:w.document.getElementById(i),
-      ORDER_URL:'https://js.playground.klarna.com/eu/kco/checkout/orders/4f19679e-ebe7-4796-9bb6-a4ad0e0583f5',
-      AUTH_HEADER:'KlarnaCheckout i2a4qcj6bso53ghupgni',
-      IS_CANARY:false,
-      IS_IN_CLIENT_ROLLOUT:false,
-      LOCALE:'sv-SE',
-      ORDER_STATUS:'checkout_incomplete',
-      MERCHANT_NAME:'Playground Demo Merchant',
-      GUI_OPTIONS:[],
-      ALLOW_SEPARATE_SHIPPING_ADDRESS:false,
-      PURCHASE_COUNTRY:'swe',
-      PURCHASE_CURRENCY:'SEK',
-      TESTDRIVE:true,
-      BOOTSTRAP_SRC:'https://js.playground.klarna.com/kcoc/241108-848f85c/checkout.bootstrap.js',
-      FE_EVENTS_DISABLED:'false',      CLIENT_EVENT_HOST:'https://eu.playground.klarnaevt.com'
-    };
-    n=d.createElement('script');
-    c=d.getElementById(i);
-    n.async=!0;
-    n.src=l.BOOTSTRAP_SRC;
-    c.appendChild(n);
-    try{
-      ((w.Image && (new w.Image))||(d.createElement && d.createElement('img'))||{}).src =
-        l.CLIENT_EVENT_HOST + '/v1/checkout/snippet/load' +
-        '?sid=' + l.ORDER_URL.split('/').slice(-1) +
-        '&order_status=' + w.encodeURIComponent(l.ORDER_STATUS) +
-        '&timestamp=' + (new Date).getTime();
-    }catch(e){}
-    reloadCheckoutHandler = function () {
-        try{
-            ((w.Image && (new w.Image))||(d.createElement && d.createElement('img'))||{}).src =
-            l.CLIENT_EVENT_HOST+'/v1/checkout/snippet/reload?sid='+l.ORDER_URL.split('/').slice(-1)+
-            '&order_status='+w.encodeURIComponent(l.ORDER_STATUS)+'&timestamp='+(new Date()).getTime();
-            window.location.reload();
-        }catch(e){}
-    }
-  })(this,'_klarnaCheckout','klarna-checkout-container',document);
-  /* ]]> */
-  
+5. Access the app on [http://localhost:3000](http://localhost:3000).
