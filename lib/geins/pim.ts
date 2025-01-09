@@ -50,10 +50,12 @@ export const getProduct = async (
   const variables = {
     alias: slug
   };
+
   const data = await geinsCore.graphql.query({ queryAsString: productQuery, variables });
   if (!data.product) {
     return undefined;
   }
+  
   return reshapeProduct(data.product);
 };
 
@@ -79,6 +81,7 @@ export const getProducts = async (
   };
 
   const data = await geinsCore.graphql.query({ queryAsString: productsQuery, variables });
+
   if (!data || !data.products || !data.products.products) {
     return [];
   }
@@ -137,12 +140,14 @@ export const getCategoryProducts = async (
     ...(take && { take }),
     ...(skip && { skip })
   };
+
+
   const data = await geinsCore.graphql.query({
     queryAsString: productsQuery,
     variables,
     requestOptions: { fetchPolicy: 'no-cache' }
   });
-
+  
   if (!data || !data.products || !data.products.products) {
     return [];
   }

@@ -111,11 +111,11 @@ export async function getPage(handle: string): Promise<PageType> {
 /* 
   CART
 */
-export async function createCart(): Promise<CartType> {
+export async function createCart(): Promise<CartType> {  
   return await oms.createCart(geinsCore);
 }
 
-export async function getCart(cartId: string | undefined): Promise<CartType | undefined> {
+export async function getCart(cartId: string | undefined): Promise<CartType | undefined> {  
   if (!cartId) {
     return undefined;
   }

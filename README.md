@@ -4,7 +4,7 @@
 
 A high-performance, server-rendered Next.js (15 RC) App Router ecommerce application.
 
-This template showcases the integration of [Geins Commerce API](https://docs.geins.io) with [Next.js Commerce](https://github.com/vercel/commerce), leveraging the open-source [Geins SDK](https://github.com/geins-io/geins).
+This template showcases the integration of [Geins Commerce API](https://docs.geins.io) with [Next.js Commerce](https://github.com/vercel/commerce), leveraging the open-source [Geins SDK](https://sdk.geins.dev/).
 
 ## Features
 
