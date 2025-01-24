@@ -1,4 +1,4 @@
-import { GeinsMenuType } from '@geins/types';
+import type { CheckoutType, GeinsMenuType } from '@geins/types';
 import {
   CURRENCY_CODE,
   DEFAULT_SKU_VARIATION,
@@ -344,7 +344,7 @@ export const reshapeCart = (geinsData: any): CartType => {
   return data;
 };
 
-export const reshapeCheckout = (geinsData: any): PageType => {
+export const reshapeCheckout = (geinsData: CheckoutType): PageType => {
   const checkoutPage: PageType = {
     id: 'checkout',
     title: 'Checkout example',
@@ -359,18 +359,18 @@ export const reshapeCheckout = (geinsData: any): PageType => {
     updatedAt: new Date().toISOString()
   };
 
-  if (!geinsData || !geinsData.createOrUpdateCheckout) {
+
+  if (!geinsData || !geinsData.paymentOptions) {
+    checkoutPage.body = 'No payment options available';
+    return checkoutPage;
+  }  
+  const selectedOption =  geinsData.paymentOptions.find((option) => option.isSelected);
+  if(!selectedOption) {
     checkoutPage.body = 'No payment options available';
     return checkoutPage;
   }
-  if (
-    !geinsData.createOrUpdateCheckout.paymentOptions ||
-    geinsData.createOrUpdateCheckout.paymentOptions.length === 0
-  ) {
-    checkoutPage.body = 'No payment options available';
-    return checkoutPage;
-  }
-  checkoutPage.body = geinsData.createOrUpdateCheckout.paymentOptions[0].paymentData;
+  
+  checkoutPage.body = selectedOption.paymentData || '';
   return checkoutPage;
 };
 

@@ -13,9 +13,9 @@
     "test": "pnpm prettier:check"
   },
   "dependencies": {
-    "@geins/cms": "0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f",
-    "@geins/core": "0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f",
-    "@geins/oms": "0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f",
+    "@geins/cms": "0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b",
+    "@geins/core": "0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b",
+    "@geins/oms": "0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b",
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "clsx": "^2.1.1",
@@ -27,7 +27,7 @@
     "sonner": "^1.5.0"
   },
   "devDependencies": {
-    "@geins/types": "0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f",
+    "@geins/types": "0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.13",
     "@types/node": "22.9.0",

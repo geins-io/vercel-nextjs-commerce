@@ -89,7 +89,7 @@ export const getMenu = async (id: string): Promise<MenuItemType[]> => {
   } else if (id === 'next-js-frontend-header-menu') {
     menuId = 'main-desktop';
   }
-  const data: MenuItemType[] = await cms.getMenu(geinsCore, menuId);
+  const data: MenuItemType[] = await cms.getMenu(geinsCore, menuId);  
   return data.filter((item) => item.title !== '');
 };
 
@@ -140,7 +140,7 @@ export async function addToCart(
   let cart = {} as CartType;
   for (let i = 0; i < items.length; i++) {
     cart = await oms.addToCart(geinsCore, cartId, items[i] as CartItemInputType);
-  }
+  }  
   return cart;
 }
 

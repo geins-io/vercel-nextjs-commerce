@@ -1,35 +1,15 @@
 'use server';
-import { GeinsCore } from '@geins/core';
+import { GeinsCore, RuntimeContext } from '@geins/core';
 import { GeinsOMS } from '@geins/oms';
 import type { OMSSettings } from '@geins/types';
-import { RuntimeContext } from '@geins/types';
-import { checkoutMutation } from './queries/mutations/checkout';
 import { reshapeCart, reshapeCheckout } from './reshape';
 import { CartItemInputType, PageType } from './types';
-
-type MerchantDataTemplate = {
-  extraData: string;
-  extraNumber?: number;
+const _settings: OMSSettings = { 
+  context: RuntimeContext.HYBRID,
+  defaultPaymentId: 23,
+  defaultShippingId: 0
 }
 
-const myTemplate: MerchantDataTemplate = {
-  extraData: '',
-  extraNumber: 0
-}
-
-
-const omsSettings1: OMSSettings = {
-  context: RuntimeContext.CLIENT
-};
-const omsSettings: OMSSettings = {
-  context: RuntimeContext.CLIENT,
-  merchantDataTemplate: myTemplate
-};
-
-
-const getCartId = (id?: string): any => {
-  return id;
-}
 
 
 export const createCart = async (geinsCore: GeinsCore): Promise<any> => {
@@ -67,6 +47,7 @@ export const addToCart = async (
   await geinsCart.get(id);
 
   const result = await geinsCart.items.add({skuId:item.skuId, quantity:item.quantity});
+  
   if (!result) {
     throw new Error('Failed to add item to cart');
   }
@@ -75,7 +56,6 @@ export const addToCart = async (
   if (!cart) {
     return {};
   }
-
   return reshapeCart(cart);
 };
 
@@ -88,13 +68,15 @@ export const removeFromCart = async (
   const geinsCart = geinsOMS.cart;
 
   await geinsCart.get(id);
+  
+  const result = await geinsCart.items.delete({id: itemId});
 
-  const result = await geinsCart.items.remove({id: itemId});
   if(!result) {
     throw new Error('Failed to remove item from cart');
   }
 
-  const cart = await geinsCart.get();  
+  const cart = await geinsCart.get();   
+
   if (!cart) {
     return {};
   }
@@ -125,17 +107,10 @@ export const updateCart = async (
 };
 
 export const getCheckoutPage = async (geinsCore: GeinsCore, cartId: string): Promise<PageType> => {
-  console.log('getCheckoutPage', cartId);
-  const variables = {
-    cartId: cartId,
-    /* checkout: {
-      paymentId: PAYMENT_ID
-    } */
-  };
-  const data = await geinsCore.graphql.mutation({
-    queryAsString: checkoutMutation,
-    variables,
-    requestOptions: { fetchPolicy: 'no-cache' }
-  });
+  const geinsOMS = new GeinsOMS(geinsCore, { omsSettings: _settings });
+  const data = await geinsOMS.checkout.get({cartId: cartId, paymentMethodId:23});  
+  if(!data) {
+    throw new Error('Failed to get checkout page');
+  }
   return reshapeCheckout(data);
 };

@@ -13,14 +13,14 @@ importers:
   .:
     dependencies:
       '@geins/cms':
-        specifier: 0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f
-        version: 0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b
+        version: 0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@geins/core':
-        specifier: 0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f
-        version: 0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b
+        version: 0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@geins/oms':
-        specifier: 0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f
-        version: 0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b
+        version: 0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@headlessui/react':
         specifier: ^2.1.2
         version: 2.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -50,8 +50,8 @@ importers:
         version: 1.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@geins/types':
-        specifier: 0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f
-        version: 0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f
+        specifier: 0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b
+        version: 0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b
       '@tailwindcss/container-queries':
         specifier: ^0.1.1
         version: 0.1.1(tailwindcss@3.4.15)
@@ -138,17 +138,17 @@ packages:
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
 
-  '@geins/cms@0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f':
-    resolution: {integrity: sha512-NfR3QQxIN4LZKzupV9cG4pEW+z0IoHDBIn80NRfbzCGzvxpjMJ8T9WljOx5tD1Rqj7wks5Obn70Ezle28IG2YQ==}
+  '@geins/cms@0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b':
+    resolution: {integrity: sha512-Nzorri6uEOkPM1/8zYR+3SvthYclAObvHhEDjqJFLxapHHJtPWKI40zlbYbroPCcBikhLsilIPA8j2jSNxqMuA==}
 
-  '@geins/core@0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f':
-    resolution: {integrity: sha512-KkicwMd7YV8qh3JznCIQQT6nDMDLFKU9bGAe1sLNJgryn5I1pa+1f9Ny1sGjzxOAqA+9QiiQvkNtESqEQ98aaQ==}
+  '@geins/core@0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b':
+    resolution: {integrity: sha512-bDZVZB32UPop0TCacHLTPsKI58b3RKZAgy2b25bwlJRRQ6BtY5DWMtsVHJ1jNiaTuiSOLoEor6H+MR3/KDQm3Q==}
 
-  '@geins/oms@0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f':
-    resolution: {integrity: sha512-4HPB+qgbYdGVICiAX5/R1zgxBsrPTx1IkX+Gkw39YSuxqXE4WL6D35mOE/LLPzZOoQPq/57ewMevPjw4Bcy+TA==}
+  '@geins/oms@0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b':
+    resolution: {integrity: sha512-TgUTtR0bEQ+FMCx7g57Q3hDJqR0NQPR1epcizPkSdafEp5Uvi2y0HA93D9QkGYnMs8oSYh+2EWXPbKFkrmCQEg==}
 
-  '@geins/types@0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f':
-    resolution: {integrity: sha512-iUdmKEsNWX0dbBgTkNRNvpfTgIpoFTGhGdpSlrSE5mL+EfjX7xcQO0B6CzMvngKuN46jA3NOZiCpU5cKyOX8dQ==}
+  '@geins/types@0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b':
+    resolution: {integrity: sha512-KTJnvozzGsgPeGUsm5gcb0FoOF2hqV9VXdYPIOBQyMKy7eLMgF4E+FcLEJzPkglXROTVZ3RHAHi6XEPzNvQSPw==}
 
   '@graphql-typed-document-node/core@3.2.0':
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
@@ -1223,9 +1223,9 @@ snapshots:
 
   '@floating-ui/utils@0.2.8': {}
 
-  '@geins/cms@0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@geins/cms@0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@geins/core': 0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@geins/core': 0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - graphql
@@ -1234,7 +1234,7 @@ snapshots:
       - react-dom
       - subscriptions-transport-ws
 
-  '@geins/core@0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@geins/core@0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@apollo/client': 3.11.10(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       broadcast-channel: 7.0.0
@@ -1248,9 +1248,9 @@ snapshots:
       - react-dom
       - subscriptions-transport-ws
 
-  '@geins/oms@0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@geins/oms@0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@geins/core': 0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@geins/core': 0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b(@types/react@18.3.18)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - graphql
@@ -1259,7 +1259,7 @@ snapshots:
       - react-dom
       - subscriptions-transport-ws
 
-  '@geins/types@0.3.9-canary-dfd2af2585c08c969e5961c149739a9b0213095f': {}
+  '@geins/types@0.3.10-canary-041e5f03d0f47a30733c0c2fba70ccb3dba3e26b': {}
 
   '@graphql-typed-document-node/core@3.2.0(graphql@16.9.0)':
     dependencies:
