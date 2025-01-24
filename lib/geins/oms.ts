@@ -3,7 +3,6 @@ import { GeinsCore } from '@geins/core';
 import { GeinsOMS } from '@geins/oms';
 import type { OMSSettings } from '@geins/types';
 import { RuntimeContext } from '@geins/types';
-import { PAYMENT_ID } from './constants';
 import { checkoutMutation } from './queries/mutations/checkout';
 import { reshapeCart, reshapeCheckout } from './reshape';
 import { CartItemInputType, PageType } from './types';
@@ -129,9 +128,9 @@ export const getCheckoutPage = async (geinsCore: GeinsCore, cartId: string): Pro
   console.log('getCheckoutPage', cartId);
   const variables = {
     cartId: cartId,
-    checkout: {
+    /* checkout: {
       paymentId: PAYMENT_ID
-    }
+    } */
   };
   const data = await geinsCore.graphql.mutation({
     queryAsString: checkoutMutation,
