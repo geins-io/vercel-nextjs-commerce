@@ -69,7 +69,7 @@ export const removeFromCart = async (
 
   await geinsCart.get(id);
   
-  const result = await geinsCart.items.delete({id: itemId});
+  const result = await geinsCart.items.delete({id: itemId, upd});
 
   if(!result) {
     throw new Error('Failed to remove item from cart');
